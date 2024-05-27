@@ -3,6 +3,8 @@ using System.Collections.Generic;
 //using Unity.VisualScripting;
 using UnityEngine;
 
+// need to make enemy die too
+
 public class EnemyBehavior : MonoBehaviour
 {
     public Transform playerMoveToward;
