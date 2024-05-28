@@ -55,7 +55,7 @@ public class LevelManager : MonoBehaviour
         //gameText.gameObject.SetActive(true);
         //AudioSource.PlayClipAtPoint(gameOverSFX, Camera.main.transform.position);
 
-        Invoke("LoadCurrentLevel", 2);
+        Invoke("LoadCurrentLevel", 1);
     }
 
     public void LevelBeat()
@@ -80,7 +80,7 @@ public class LevelManager : MonoBehaviour
         //AudioSource.PlayClipAtPoint(gameWonSFX, Camera.main.transform.position);
         if (!string.IsNullOrEmpty(nextLevel))
         {
-            Invoke("LoadNextLevel", 2);
+            Invoke("LoadNextLevel", 1);
         }
 
     }

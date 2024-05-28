@@ -13,7 +13,7 @@ public class EnemyBehavior : MonoBehaviour
     public int damageAmount = 20;
     bool seenPlayer = false;
     int healthAmount;
-    bool enemyDead;
+    public static bool enemyDead;
     float distance;
     public GameObject ghostRanParticle; // particle prefab
     public GameObject lootPrefab;
