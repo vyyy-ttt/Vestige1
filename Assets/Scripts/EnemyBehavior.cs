@@ -17,6 +17,8 @@ public class EnemyBehavior : MonoBehaviour
     float distance;
     public GameObject ghostRanParticle; // particle prefab
     public GameObject lootPrefab;
+    public AudioClip slashSFX;
+    public Transform cameraTransform;
     //Renderer renderer;
     //Color tempcolor;
 
@@ -87,6 +89,7 @@ public class EnemyBehavior : MonoBehaviour
         {
             gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("AxeSwung");
             gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("AxeReturned");
+            AudioSource.PlayClipAtPoint(slashSFX, cameraTransform.position);
             Debug.Log("enemy attacked");
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealthLootBehavior : MonoBehaviour
 {
     public int healthAmount = 15;
-    public AudioClip lootSFX;
+    public AudioClip pickupSFX;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,7 @@ public class HealthLootBehavior : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             gameObject.SetActive(false);
-            //AudioSource.PlayClipAtPoint(lootSFX, transform.position);
+            AudioSource.PlayClipAtPoint(pickupSFX, other.transform.position);
             FindObjectOfType<PlayerHealth>().TakeHealth(healthAmount);
 
             Destroy(gameObject, 0.5f);

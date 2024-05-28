@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerSwordBehavior : MonoBehaviour
 {
+    public AudioClip slashSFX;
+    public Transform cameraTransform;
     public static bool swordIsActive;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,7 @@ public class PlayerSwordBehavior : MonoBehaviour
         {
             gameObject.transform.GetChild(2).GetComponent<Animator>().SetTrigger("SwordSwung");
             gameObject.transform.GetChild(2).GetComponent<Animator>().SetTrigger("SwordReturned");
+            AudioSource.PlayClipAtPoint(slashSFX, cameraTransform.position);
         }
     }
 }

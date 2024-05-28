@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class MemoryPickUpBehavior : MonoBehaviour
 {
-
+    public AudioClip pickupSFX;
+    public Transform cameraTransform;
     private bool bonusActive;
     void Start()
     {
@@ -23,7 +24,7 @@ public class MemoryPickUpBehavior : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            
+            AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
             FindObjectOfType<LevelManager>().UpdateMemoryCountText();
 
             Destroy(gameObject);
