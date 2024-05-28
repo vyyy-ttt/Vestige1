@@ -57,13 +57,13 @@ public class PlayerAttack : MonoBehaviour
             else
             {
                 //currentProjectilePrefab = projectilePrefab;
-                reticleImage.color = Color.Lerp(reticleImage.color, originalReticleColor, Time.deltaTime * 2);
+                reticleImage.color = Color.Lerp(reticleImage.color, Color.white, Time.deltaTime * 2);
                 //reticleImage.transform.localScale = Vector3.Lerp(reticleImage.transform.localScale, Vector3.one, Time.deltaTime * 2);
             }
         }
         else
         {
-            reticleImage.color = Color.Lerp(reticleImage.color, originalReticleColor, Time.deltaTime * 2);
+            reticleImage.color = Color.Lerp(reticleImage.color, Color.white, Time.deltaTime * 2);
         }
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, 2))
