@@ -41,8 +41,9 @@ public class PlayerHealth : MonoBehaviour
     void PlayerDies()
     {
         Debug.Log("Player ran away...");
-        AudioSource.PlayClipAtPoint(deadSFX, transform.position);
+        //AudioSource.PlayClipAtPoint(deadSFX, transform.position);
         transform.Rotate(-90, 0, 0, Space.Self); // Space.Self, according to local rotation
+        FindObjectOfType<LevelManager>().LevelLost();
     }
 
     public void TakeHealth(int healthAmount)

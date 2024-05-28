@@ -15,6 +15,11 @@ public class EnemyBehavior : MonoBehaviour
     int healthAmount;
     bool enemyDead;
     float distance;
+    public GameObject ghostRanParticle; // particle prefab
+    public GameObject lootPrefab;
+    //Renderer renderer;
+    //Color tempcolor;
+
     //bool enemyAttack;
 
     // Start is called before the first frame update
@@ -22,6 +27,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         enemyDead = false;
         healthAmount = 100;
+        //renderer = gameObject.GetComponent<Renderer>();
         if (playerMoveToward == null)
         {
             playerMoveToward = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject.transform;
@@ -87,7 +93,11 @@ public class EnemyBehavior : MonoBehaviour
 
     public void EnemyTakesDamage(int amount)
     {
-        SwingWeapon();
+        //SwingWeapon();
+        /*tempcolor = GetComponent<MeshRenderer>().material.color;
+        tempcolor.a = 1f - ((amount / 100f) / 1.5f);
+        GetComponent<MeshRenderer>().material.color = tempcolor;*/
+        //renderer.material.color.a = 
         healthAmount -= amount;
         if (healthAmount < 0)
         {
@@ -101,5 +111,10 @@ public class EnemyBehavior : MonoBehaviour
         Debug.Log("enemy ran away");
         // play an animation
         // drop health that player can pick up
+        Instantiate(ghostRanParticle, transform.position, Quaternion.Euler(0, 1, 0));
+        gameObject.SetActive(false); // dementor will disappear from view
+        Instantiate(lootPrefab, transform.position + Vector3.up, transform.rotation);
+        Destroy(gameObject, 0.5f); // delay destroying dementor because we reference its posiition and rotation when instantiating
+
     }
 }
