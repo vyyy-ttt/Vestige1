@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -9,10 +10,12 @@ public class PlayerAttack : MonoBehaviour
     public Image reticleImage;
     int weaponDamage;
     Color originalReticleColor;
+    public Text gameText;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameText.gameObject.SetActive(false);
         originalReticleColor = Color.white;
         weaponDamage = 20;
     }
@@ -64,7 +67,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, 2))
         {
-            if (hit.collider.CompareTag("Enemy") && Input.GetButtonDown("Fire1"))
+            if (hit.collider.CompareTag("Enemy") && PlayerSwordBehavior.swordIsActive && Input.GetButtonDown("Fire1"))
             {
                 Debug.Log("enemy took damage");
                 FindObjectOfType<EnemyBehavior>().EnemyTakesDamage(weaponDamage);
@@ -85,6 +88,13 @@ public class PlayerAttack : MonoBehaviour
     // exiting training room
     private void InDoor()
     {
+        if (SceneManager.GetActiveScene().name == "Level1d")
+        {
+            if (EnemyBehavior.enemyDead == true)
+            {
+                gameText.gameObject.SetActive(true);
+            }
+        }
         LevelManager.isGameOver = true;
         FindObjectOfType<LevelManager>().LevelBeat();
     }
