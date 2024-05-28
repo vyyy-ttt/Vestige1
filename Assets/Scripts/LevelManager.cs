@@ -12,7 +12,8 @@ public class LevelManager : MonoBehaviour
     //public AudioClip gameOverSFX;
     //public AudioClip gameWonSFX;
     public string nextLevel;
-
+    public static int totalMemories = 0;
+    public Text memoryCount;
 
     void Start()
     {
@@ -20,6 +21,8 @@ public class LevelManager : MonoBehaviour
         isGameOver = false;
         // set UI and timers
         //gameText.gameObject.SetActive(false);
+        totalMemories = 0;
+        memoryCount.text = "memories: " + totalMemories; 
     }
 
     void Update()
@@ -90,5 +93,12 @@ public class LevelManager : MonoBehaviour
     void LoadCurrentLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void UpdateMemoryCountText()
+    {
+        totalMemories++;
+
+        memoryCount.text = "memories: " + totalMemories;
     }
 }
