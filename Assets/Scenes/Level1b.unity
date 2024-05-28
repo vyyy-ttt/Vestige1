@@ -403,6 +403,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7680286095802109548, guid: 6ea66b12b65e75c4ab3d74deb35a3b12, type: 3}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 762468529}
     - target: {fileID: 1162371424941802753, guid: 6ea66b12b65e75c4ab3d74deb35a3b12, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.636
@@ -502,7 +506,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a2e18fe7bc76b74196015733eee43be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorSFX: {fileID: 8300000, guid: f5edddf93c566b24186914ee883bc782, type: 3}
   reticleImage: {fileID: 1557830497}
+  gameText: {fileID: 0}
+  cameraTransform: {fileID: 1124578611}
 --- !u!1 &170229015
 GameObject:
   m_ObjectHideFlags: 0
@@ -2462,6 +2469,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108503643}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1124578611 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8626593138658510910, guid: 6ea66b12b65e75c4ab3d74deb35a3b12, type: 3}
+  m_PrefabInstance: {fileID: 96049770}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1159323737
 GameObject:
   m_ObjectHideFlags: 0

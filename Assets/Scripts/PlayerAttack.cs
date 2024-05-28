@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerAttack : MonoBehaviour
 {
-    //public AudioClip spellSFX;
+    public AudioClip doorSFX;
     public Image reticleImage;
     int weaponDamage;
     Color originalReticleColor;
     public Text gameText;
+    public Transform cameraTransform;
 
     // Start is called before the first frame update
     void Start()
@@ -95,6 +96,10 @@ public class PlayerAttack : MonoBehaviour
                 gameText.gameObject.SetActive(true);
             }
         }
+        else
+        {
+            AudioSource.PlayClipAtPoint(doorSFX, cameraTransform.position);
+        }
         LevelManager.isGameOver = true;
         FindObjectOfType<LevelManager>().LevelBeat();
     }
@@ -102,6 +107,7 @@ public class PlayerAttack : MonoBehaviour
     // entering training room
     private void OutDoor()
     {
+        AudioSource.PlayClipAtPoint(doorSFX, cameraTransform.position);
         gameObject.transform.position = transform.position + new Vector3(0, 0, 2.5f);
     }
 }

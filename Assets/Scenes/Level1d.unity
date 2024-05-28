@@ -1261,6 +1261,10 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5943281822021965039, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
+      propertyPath: slashSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: b120fc3bee070324fa39b18fe6c83d8e, type: 3}
+    - target: {fileID: 5943281822021965039, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
       propertyPath: moveSpeed
       value: 2
       objectReference: {fileID: 0}
@@ -1268,6 +1272,10 @@ PrefabInstance:
       propertyPath: minDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5943281822021965039, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 1746795403}
     - target: {fileID: 5943281822021965039, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
       propertyPath: playerMoveToward
       value: 
@@ -3541,8 +3549,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a2e18fe7bc76b74196015733eee43be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorSFX: {fileID: 8300000, guid: f5edddf93c566b24186914ee883bc782, type: 3}
   reticleImage: {fileID: 426588759}
   gameText: {fileID: 2024288752}
+  cameraTransform: {fileID: 1746795403}
+--- !u!4 &1746795403 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3909787254985690500, guid: 0975a0101336029429c307c8afefaefb, type: 3}
+  m_PrefabInstance: {fileID: 1746795400}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1746795409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3555,6 +3570,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94cc19e140465a24688d04c5b50e27ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slashSFX: {fileID: 8300000, guid: b120fc3bee070324fa39b18fe6c83d8e, type: 3}
+  cameraTransform: {fileID: 1746795403}
 --- !u!114 &1746795410
 MonoBehaviour:
   m_ObjectHideFlags: 0
