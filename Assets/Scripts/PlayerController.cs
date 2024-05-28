@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         input = (transform.right * moveHorizontal + transform.forward * moveVertical).normalized;
-        input *= moveSpeed;
+        input *= currentSpeed;
 
         if(controller.isGrounded)
         {

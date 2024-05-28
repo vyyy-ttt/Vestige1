@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
-    public void TakeDamage(int damageAmount)
+    public void PlayerTakesDamage(int damageAmount)
     {
         if (currentHealth > 0)
         {
@@ -40,9 +40,10 @@ public class PlayerHealth : MonoBehaviour
 
     void PlayerDies()
     {
-        Debug.Log("Player is dead...");
-        AudioSource.PlayClipAtPoint(deadSFX, transform.position);
+        Debug.Log("Player ran away...");
+        //AudioSource.PlayClipAtPoint(deadSFX, transform.position);
         transform.Rotate(-90, 0, 0, Space.Self); // Space.Self, according to local rotation
+        FindObjectOfType<LevelManager>().LevelLost();
     }
 
     public void TakeHealth(int healthAmount)

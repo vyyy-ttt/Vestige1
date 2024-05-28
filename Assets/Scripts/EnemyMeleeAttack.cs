@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class EnemyMeleeAttack : MonoBehaviour
 {
+    int weaponDamage;
     // Start is called before the first frame update
     void Start()
     {
-        
+        weaponDamage = 10;
     }
 
     // Update is called once per frame
@@ -22,6 +23,7 @@ public class EnemyMeleeAttack : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("player took damage");
+            FindObjectOfType<PlayerHealth>().PlayerTakesDamage(weaponDamage);
             //var playerHealth = other.GetComponent<PlayerHealth>();
             //playerHealth.TakeDamage(damageAmount);
             // play a sound effect
