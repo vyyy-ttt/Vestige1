@@ -9,6 +9,7 @@ TagManager:
   - Door
   - OutDoor
   - InDoor
+  - Sword
   layers:
   - Default
   - TransparentFX

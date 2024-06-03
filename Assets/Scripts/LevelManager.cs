@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     public static bool isGameOver = false;
-    //public Text gameText;
-    //public AudioClip gameOverSFX;
+    //public Text gameText; // currently with Player Attack
+    //public AudioClip gameOverSFX; 
     //public AudioClip gameWonSFX;
     public string nextLevel;
     public static int totalMemories = 0;
@@ -19,30 +19,15 @@ public class LevelManager : MonoBehaviour
     {
         // game is not over upon starting
         isGameOver = false;
-        // set UI and timers
-        //gameText.gameObject.SetActive(false);
         totalMemories = 0;
-        memoryCount.text = "memories: " + totalMemories; 
+        //gameText.gameObject.SetActive(false);
+        //totalMemories = 0;
+        //memoryCount.text = "memories: " + totalMemories; 
     }
 
     void Update()
     {
-        // if the game is not over, count down by seconds until game ends and level is lost
-        // update timer text
-        if (!isGameOver)
-        {/*
-            if (countDown > 0)
-            {
-                countDown -= Time.deltaTime; //subtract time since the last frame
-            }
-            else
-            {
-                countDown = 0.0f;
-                LevelLost();
-            }
 
-           */
-        }
     }
 
     // called when health reaches 0
@@ -98,7 +83,9 @@ public class LevelManager : MonoBehaviour
     public void UpdateMemoryCountText()
     {
         totalMemories++;
+        Debug.Log(totalMemories);
 
         memoryCount.text = "memories: " + totalMemories;
+        Debug.Log(memoryCount.text);
     }
 }

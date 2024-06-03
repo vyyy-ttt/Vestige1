@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 2177527190678355946}
   - component: {fileID: 8641194739200543852}
   - component: {fileID: 5650140203064356572}
+  - component: {fileID: 3292453487509204736}
+  - component: {fileID: 2809830068368978896}
+  - component: {fileID: 4964519291955177229}
   m_Layer: 0
   m_Name: PlayerWithSword
   m_TagString: Player
@@ -124,8 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc305c6c48cff854681f6ea127d5bf63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  jumpHeight: 10
+  moveSpeed: 3
+  jumpHeight: 1
   gravity: 9.81
   airControl: 10
 --- !u!143 &5650140203064356572
@@ -154,6 +157,51 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3292453487509204736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132331766877272167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a2e18fe7bc76b74196015733eee43be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorSFX: {fileID: 8300000, guid: f5edddf93c566b24186914ee883bc782, type: 3}
+  reticleImage: {fileID: 0}
+  gameText: {fileID: 0}
+  cameraTransform: {fileID: 3909787254985690500}
+--- !u!114 &2809830068368978896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132331766877272167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94cc19e140465a24688d04c5b50e27ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slashSFX: {fileID: 8300000, guid: b120fc3bee070324fa39b18fe6c83d8e, type: 3}
+  cameraTransform: {fileID: 3909787254985690500}
+--- !u!114 &4964519291955177229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132331766877272167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 760f17b132a4ee346ae4c0fd5e4943de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  deadSFX: {fileID: 0}
+  healthSlider: {fileID: 0}
 --- !u!1 &2056629662768125081
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +264,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 21e3b3966cc01764aba5f2e15e9edcb3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -366,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4737fb7cfccc44c7cbfc9df819f56bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 10
+  mouseSensitivity: 100
   cameraHeightAdjustSpeed: 2
 --- !u!1001 &1027799646274787298
 PrefabInstance:
