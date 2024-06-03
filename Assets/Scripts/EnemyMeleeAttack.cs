@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyMeleeAttack : MonoBehaviour
 {
     int weaponDamage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,19 +17,16 @@ public class EnemyMeleeAttack : MonoBehaviour
     {
         
     }
-
-    // move this to be for child object
+    
+    // colliding with weapon deals damage
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             Debug.Log("player took damage");
             FindObjectOfType<PlayerHealth>().PlayerTakesDamage(weaponDamage);
-            //var playerHealth = other.GetComponent<PlayerHealth>();
-            //playerHealth.TakeDamage(damageAmount);
             // play a sound effect
-            // play an animation?
-
+            // play an animation? player moves?
         }
     }
 }

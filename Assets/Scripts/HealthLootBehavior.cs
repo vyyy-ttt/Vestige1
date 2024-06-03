@@ -16,15 +16,11 @@ public class HealthLootBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // rotate object
         transform.Rotate(Vector3.forward, 360 * Time.deltaTime);
-        /*
-        if (transform.position.y < Random.Range(1.0f, 3.0f))
-        {
-            Destroy(gameObject.GetComponent<Rigidbody>());
-        }*/
     }
 
-    
+    // give player health and then self destroy
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

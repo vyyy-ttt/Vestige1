@@ -24,30 +24,33 @@ public class PlayerController : MonoBehaviour
     {
         float currentSpeed = moveSpeed;
 
-        // crouching
+        // crouching toggle
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             isCrouching = !isCrouching;
         }
 
-        // crouch speed
+        // crouch speed is halved
         if (isCrouching)
         {
             currentSpeed /= 2;
         }
 
-        // run speed
+        // run speed is doubled
         if (Input.GetKey(KeyCode.LeftShift))
         {
             currentSpeed *= 2;
         }
 
+        // controller movements from WASD
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
+        // diagonal doesn't give extra speed
         input = (transform.right * moveHorizontal + transform.forward * moveVertical).normalized;
         input *= currentSpeed;
 
+        // can jump if character grounded
         if(controller.isGrounded)
         {
             moveDirection = input;
@@ -62,6 +65,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        // can move middair
         else 
         {
             input.y = moveDirection.y;
