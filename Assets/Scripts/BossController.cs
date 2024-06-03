@@ -6,81 +6,61 @@ using System.Collections;
 
 public class BossController : MonoBehaviour
 {
-    public Transform[] spawnPoints;
-    public GameObject enemyPrefab;
-    public float summonInterval = 10f;
-    public float attackRange = 2f;
-    public int attackDamage = 10;
-    public float attackCooldown = 2f;
+    public int attackDamage = 10; 
+    public float attackRange = 5.0f;
+    public float attackCooldown = 2.0f; 
     private float lastAttackTime;
-    private Transform player;
-    private UnityEngine.AI.NavMeshAgent navAgent;
-    private bool isDead = false;
+
+    private Transform player; 
+    private NavMeshAgent navAgent;
 
     // Start is called before the first frame update
     void Start()
     {
-        navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        StartCoroutine(SummonEnemies());
+        player = GameObject.FindWithTag("Player").transform;
+        navAgent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isDead)
+        TracePlayer();
+
+        if (Time.time > lastAttackTime + attackCooldown && IsPlayerInRange())
+        {
+            Attack();
+            lastAttackTime = Time.time;
+        }
+    }
+
+    void TracePlayer()
+    {
+        if (player != null)
+        {
+            navAgent.SetDestination(player.position);
+        }
+    }
+
+    bool IsPlayerInRange()
+    {
+        if (player != null)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-            if (distanceToPlayer <= attackRange)
-            {
-                if (Time.time > lastAttackTime + attackCooldown)
-                {
-                    AttackPlayer();
-                    lastAttackTime = Time.time;
-                }
-            }
-            else
-            {
-                navAgent.SetDestination(player.position);
-            }
+            return distanceToPlayer <= attackRange;
         }
+        return false;
     }
 
-    IEnumerator SummonEnemies()
+    void Attack()
     {
-        while (!isDead)
+        GameObject playerObject = GameObject.FindWithTag("Player");
+        if (playerObject != null)
         {
-            yield return new WaitForSeconds(summonInterval);
-            if (!isDead)
+            PlayerHealth playerHealth = playerObject.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
             {
-                foreach (var spawnPoint in spawnPoints)
-                {
-                    Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-                }
+                playerHealth.PlayerTakesDamage(attackDamage);
             }
         }
-    }
-
-    void AttackPlayer()
-    {
-        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-        if (playerHealth != null)
-        {
-            playerHealth.TakeDamage(attackDamage);
-        }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        if (!isDead)
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        isDead = true;
-        // FindObjectOfType<LevelManager>().BossDefeated();
     }
 }
