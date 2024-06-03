@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 6ed27bc63ceb1f647b96731c1298b7ce
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - pickupSFX: {fileID: 8300000, guid: f0f2fa2742aeac04392217674b3ceb84, type: 3}
+  - cameraTransform: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 5943281822021965039}
   m_Layer: 0
   m_Name: Ghost1_Axe
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -539,9 +539,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMoveToward: {fileID: 0}
-  moveSpeed: 4
-  minDistance: 2
+  moveSpeed: 2
+  minDistance: 1
   damageAmount: 20
+  ghostRanParticle: {fileID: 4896313819944489767, guid: 8b1ea687510bee5409befe5e6345f433, type: 3}
+  lootPrefab: {fileID: 8492560867077331667, guid: 172ef5eade7cd8444ad5883bcaf77d38, type: 3}
 --- !u!1 &6646186729396141084
 GameObject:
   m_ObjectHideFlags: 0

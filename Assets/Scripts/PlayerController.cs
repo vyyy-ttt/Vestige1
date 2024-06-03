@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    public float moveSpeed = 10;
+    public float moveSpeed = 3f;
     public float jumpHeight = 10;
     public float gravity = 9.81f;
     public float airControl = 10;
@@ -24,30 +24,33 @@ public class PlayerController : MonoBehaviour
     {
         float currentSpeed = moveSpeed;
 
-        // crouching
+        // crouching toggle
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             isCrouching = !isCrouching;
         }
 
-        // crouch speed
+        // crouch speed is halved
         if (isCrouching)
         {
             currentSpeed /= 2;
         }
 
-        // run speed
+        // run speed is doubled
         if (Input.GetKey(KeyCode.LeftShift))
         {
             currentSpeed *= 2;
         }
 
+        // controller movements from WASD
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
+        // diagonal doesn't give extra speed
         input = (transform.right * moveHorizontal + transform.forward * moveVertical).normalized;
-        input *= moveSpeed;
+        input *= currentSpeed;
 
+        // can jump if character grounded
         if(controller.isGrounded)
         {
             moveDirection = input;
@@ -62,6 +65,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        // can move middair
         else 
         {
             input.y = moveDirection.y;
