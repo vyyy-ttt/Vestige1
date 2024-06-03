@@ -13,6 +13,7 @@ public class PlayerAttack : MonoBehaviour
     public Text gameText;
     public Transform cameraTransform;
     public static bool disableTeleport;
+    private MouseLook mouseLook;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
         gameText.gameObject.SetActive(false);
         originalReticleColor = Color.white;
         weaponDamage = 20;
+        mouseLook = GetComponent<MouseLook>();
     }
 
     // Update is called once per frame
@@ -74,6 +76,12 @@ public class PlayerAttack : MonoBehaviour
         //At distance of 2:
         if (Physics.Raycast(transform.position, transform.forward, out hit, 2))
         {
+            // immediate kill if crouching when attacking
+            if(mouseLook.isCrouching && hit.collider.CompareTag("Enemy") && PlayerSwordBehavior.swordIsActive && Input.GetButtonDown("Fire1"))
+            {
+                Debug.Log("enemy died hopefully");
+                FindObjectOfType<EnemyBehavior>().EnemyTakesDamage(100);
+            }
             // if enemy within 2 units and player has sword out and hits mouse, enemy takes damage
             if (hit.collider.CompareTag("Enemy") && PlayerSwordBehavior.swordIsActive && Input.GetButtonDown("Fire1"))
             {

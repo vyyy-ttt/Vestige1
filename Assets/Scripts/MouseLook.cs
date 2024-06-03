@@ -8,7 +8,7 @@ public class MouseLook : MonoBehaviour
     private float normalCamHeight;
     public float mouseSensitivity = 100f;
     public float cameraHeightAdjustSpeed = 2f;
-    private bool isCrouching = false;
+    public bool isCrouching = false;
 
     float pitch = 0;
     void Start()
