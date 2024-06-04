@@ -131,6 +131,7 @@ public class GhostEnemyAI : MonoBehaviour
         
     //     FaceTarget(nextDestination);
 
+<<<<<<< Updated upstream
     //     anim.SetInteger("animState", 3);
 
     //     EnemySpellCast(); 
@@ -138,6 +139,12 @@ public class GhostEnemyAI : MonoBehaviour
     // }
     // void UpdateDeadState()
     // {
+=======
+        // should be attacking because of enemy melee attack ?
+    }
+    void UpdateDeadState()
+    {
+>>>>>>> Stashed changes
         
     // }
 
@@ -156,6 +163,7 @@ public class GhostEnemyAI : MonoBehaviour
     //     transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 10 * Time.deltaTime);
     // }
 
+<<<<<<< Updated upstream
     // void EnemySpellCast()
     // {
     //     if(elapsedTime >= shootRate)
@@ -184,4 +192,20 @@ public class GhostEnemyAI : MonoBehaviour
 
 
     // }
+=======
+    
+
+
+    private void OnDrawGizmos()
+    {
+        //attack
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackDistance);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, chaseDistance);
+
+
+    }
+>>>>>>> Stashed changes
 }
