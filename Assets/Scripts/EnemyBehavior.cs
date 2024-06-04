@@ -46,7 +46,7 @@ public class EnemyBehavior : MonoBehaviour
         // if enemy sees player, look at player
         if (!enemiesDead && seenPlayer)
         {
-            PlayerAttack.disableTeleport = true;
+            PlayerAttack.disableTeleport = false;
             transform.LookAt(playerMoveToward);
             var step = moveSpeed * Time.deltaTime;
             var distance = (transform.position - playerMoveToward.position).magnitude;
