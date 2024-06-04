@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3624,6 +3624,11 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &571348211 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1132331766877272167, guid: 0975a0101336029429c307c8afefaefb, type: 3}
+  m_PrefabInstance: {fileID: 1093559904}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &584933987
 GameObject:
   m_ObjectHideFlags: 0
@@ -4590,7 +4595,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5087195d6dd24424ba2a7ef7d297ceca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMoveToward: {fileID: 0}
   moveSpeed: 2
   minDistance: 1
   damageAmount: 20
@@ -4623,11 +4627,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a603ce28aca714bba8584c1c2ebba2ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
+  currentState: 1
   attackDistance: 2
   chaseDistance: 4
   enemySpeed: 3
-  player: {fileID: 0}
+  player: {fileID: 571348211}
   shootRate: 2
 --- !u!1001 &695982681
 PrefabInstance:
@@ -7183,11 +7187,6 @@ PrefabInstance:
 --- !u!4 &1093559905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3909787254985690500, guid: 0975a0101336029429c307c8afefaefb, type: 3}
-  m_PrefabInstance: {fileID: 1093559904}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1093559906 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2817680530365536434, guid: 0975a0101336029429c307c8afefaefb, type: 3}
   m_PrefabInstance: {fileID: 1093559904}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1098008796
@@ -11327,15 +11326,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4288314564357214324, guid: 944690db56c8ecd4eb71cd85def4fa24, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.406
+      value: -0.675
       objectReference: {fileID: 0}
     - target: {fileID: 4288314564357214324, guid: 944690db56c8ecd4eb71cd85def4fa24, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.7
+      value: 2.608
       objectReference: {fileID: 0}
     - target: {fileID: 4288314564357214324, guid: 944690db56c8ecd4eb71cd85def4fa24, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 26.9
+      value: 27.477
       objectReference: {fileID: 0}
     - target: {fileID: 4288314564357214324, guid: 944690db56c8ecd4eb71cd85def4fa24, type: 3}
       propertyPath: m_LocalRotation.w
@@ -16355,7 +16354,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5087195d6dd24424ba2a7ef7d297ceca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMoveToward: {fileID: 1093559906}
   moveSpeed: 2
   minDistance: 1
   damageAmount: 20
