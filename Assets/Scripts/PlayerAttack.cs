@@ -59,6 +59,17 @@ public class PlayerAttack : MonoBehaviour
             else if (hit.collider.CompareTag("InDoor") || hit.collider.CompareTag("OutDoor"))
             {
                 reticleImage.color = Color.Lerp(reticleImage.color, Color.yellow, Time.deltaTime * 2);
+                if (Physics.Raycast(transform.position, transform.forward, out hit, 2))
+                {
+                    if (hit.collider.CompareTag("OutDoor") && Input.GetKeyDown(KeyCode.E) && !disableTeleport)
+                    {
+                        DoorTeleport();
+                    }
+                    if (hit.collider.CompareTag("InDoor") && Input.GetKeyDown(KeyCode.E))
+                    {
+                        ElevatorNextLevel();
+                    }
+                }
             }
             // otherwise turn white
             else
@@ -91,7 +102,7 @@ public class PlayerAttack : MonoBehaviour
             else if (hit.collider.CompareTag("InDoor") && Input.GetKeyDown(KeyCode.E))
             {
                 ElevatorNextLevel();
-            }
+            }            
             else if (hit.collider.CompareTag("OutDoor") && Input.GetKeyDown(KeyCode.E) && !disableTeleport)
             {
                 DoorTeleport();
