@@ -9,7 +9,7 @@ public class EnemyBehavior : MonoBehaviour
 {
     // reference to player child object,a tiny transparent capsule at same y position as ghost
     // prevents ghost from attacking at weird angles
-    public Transform playerMoveToward;
+    Transform playerMoveToward;
     
     public float moveSpeed = 2f;
     public float minDistance = 1f; // enemy stops here and attacks
@@ -46,7 +46,7 @@ public class EnemyBehavior : MonoBehaviour
         // if enemy sees player, look at player
         if (!enemiesDead && seenPlayer)
         {
-            PlayerAttack.disableTeleport = true;
+            PlayerAttack.disableTeleport = false;
             transform.LookAt(playerMoveToward);
             var step = moveSpeed * Time.deltaTime;
             var distance = (transform.position - playerMoveToward.position).magnitude;
