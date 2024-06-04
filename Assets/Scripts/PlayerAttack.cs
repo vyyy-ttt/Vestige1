@@ -88,7 +88,7 @@ public class PlayerAttack : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, 2))
         {
             // immediate kill if crouching when attacking
-            if(mouseLook.isCrouching && hit.collider.CompareTag("Enemy") && PlayerSwordBehavior.swordIsActive && Input.GetButtonDown("Fire1"))
+            if(MouseLook.isCrouching && hit.collider.CompareTag("Enemy") && PlayerSwordBehavior.swordIsActive && Input.GetButtonDown("Fire1"))
             {
                 Debug.Log("enemy died hopefully");
                 FindObjectOfType<EnemyBehavior>().EnemyTakesDamage(100);
@@ -114,20 +114,18 @@ public class PlayerAttack : MonoBehaviour
     // if player hits E on closeby InDoor, trigger next level
     private void ElevatorNextLevel()
     {
-        /*
-        if (SceneManager.GetActiveScene().name == "Level1")
+        
+        if (SceneManager.GetActiveScene().name == "Level4")
         {
-            if (EnemyBehavior.enemiesDead == true)
-            {
-                gameText.gameObject.SetActive(true);
-            }
+
+            gameText.gameObject.SetActive(true);
         }
         else
         {
-            AudioSource.PlayClipAtPoint(doorSFX, cameraTransform.position);
-        }*/
-        LevelManager.isGameOver = true;
-        FindObjectOfType<LevelManager>().LevelBeat();
+            LevelManager.isGameOver = true;
+            FindObjectOfType<LevelManager>().LevelBeat();
+    
+        }
     }
 
     // if player hits E on closeby OutDoor, enter next room

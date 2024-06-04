@@ -67,7 +67,7 @@ public class GhostEnemyAI : MonoBehaviour
     }
     void UpdatePatrolState()
     {
-        print("Patrolling!");
+        //print("Patrolling!");
 
         if(Vector3.Distance(transform.position, nextDestination) < 1)
         {
@@ -104,7 +104,7 @@ public class GhostEnemyAI : MonoBehaviour
     }
     void UpdateAttackState()
     {
-        print("attack");
+        //print("attack");
 
         nextDestination = player.transform.position;
 

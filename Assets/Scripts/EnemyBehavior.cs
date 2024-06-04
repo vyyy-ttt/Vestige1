@@ -9,7 +9,7 @@ public class EnemyBehavior : MonoBehaviour
 {
     // reference to player child object,a tiny transparent capsule at same y position as ghost
     // prevents ghost from attacking at weird angles
-    Transform playerMoveToward;
+    public Transform playerMoveToward;
     
     public float moveSpeed = 2f;
     public float minDistance = 1f; // enemy stops here and attacks
