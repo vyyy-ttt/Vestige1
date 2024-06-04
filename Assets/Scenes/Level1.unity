@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4504,6 +4504,10 @@ PrefabInstance:
       value: LittleGhost_LP (1)
       objectReference: {fileID: 0}
     - target: {fileID: 498253721416304272, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 498253721416304272, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -4595,14 +4599,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5087195d6dd24424ba2a7ef7d297ceca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMoveToward: {fileID: 1167157766}
   moveSpeed: 2
   minDistance: 1
   damageAmount: 20
   enemySeesPlayerDistance: 5
-  ghostRanParticle: {fileID: 0}
-  lootPrefab: {fileID: 0}
-  slashSFX: {fileID: 0}
-  cameraTransform: {fileID: 0}
+  ghostRanParticle: {fileID: 4896313819944489767, guid: 8b1ea687510bee5409befe5e6345f433, type: 3}
+  lootPrefab: {fileID: 8492560867077331667, guid: 172ef5eade7cd8444ad5883bcaf77d38, type: 3}
+  slashSFX: {fileID: 8300000, guid: b120fc3bee070324fa39b18fe6c83d8e, type: 3}
+  cameraTransform: {fileID: 1093559905}
 --- !u!114 &695574645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7515,6 +7520,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &1167157766 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2817680530365536434, guid: 0975a0101336029429c307c8afefaefb, type: 3}
+  m_PrefabInstance: {fileID: 1093559904}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1232090793
 GameObject:
   m_ObjectHideFlags: 0
@@ -16352,6 +16362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5087195d6dd24424ba2a7ef7d297ceca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMoveToward: {fileID: 1167157766}
   moveSpeed: 2
   minDistance: 1
   damageAmount: 20
