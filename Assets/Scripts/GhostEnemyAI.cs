@@ -32,7 +32,16 @@ public class GhostEnemyAI : MonoBehaviour
     // void Start()
     // {
         
+<<<<<<< Updated upstream
     //    Initialize();
+=======
+
+        wanderPoints = GameObject.FindGameObjectsWithTag("WanderPoint");
+        Debug.Log("Wander points:" + wanderPoints);
+        player = GameObject.FindGameObjectWithTag("Player");
+        FindNextPoint();
+        currentState = FSMStates.Patrol;
+>>>>>>> Stashed changes
 
     // }
 
@@ -60,6 +69,7 @@ public class GhostEnemyAI : MonoBehaviour
     //     elapsedTime += Time.deltaTime;
     // }
 
+<<<<<<< Updated upstream
     // private void Initialize()
     // {
     //     currentState = FSMStates.Patrol;
@@ -83,6 +93,29 @@ public class GhostEnemyAI : MonoBehaviour
     //     {
     //         currentState = FSMStates.Chase;
     //     }
+=======
+    void Initialize()
+    {
+        // currentState = FSMStates.Patrol;
+        // FindNextPoint();
+
+        // wanderPoints = GameObject.FindGameObjectsWithTag("WanderPoint");
+        // player = GameObject.FindGameObjectWithTag("Player");
+    }
+    void UpdatePatrolState()
+    {
+        //print("Patrolling!");
+        //Debug.Log(distanceToPlayer);
+        //Debug.Log(nextDestination);
+        if(Vector3.Distance(transform.position, nextDestination) < 1)
+        {
+            FindNextPoint();
+        }
+        else if(distanceToPlayer <= chaseDistance)
+        {
+            currentState = FSMStates.Chase;
+        }
+>>>>>>> Stashed changes
 
     //     FaceTarget(nextDestination);
 
@@ -148,9 +181,16 @@ public class GhostEnemyAI : MonoBehaviour
         
     // }
 
+<<<<<<< Updated upstream
     // void FindNextPoint()
     // {
     //     nextDestination = wanderPoints[currentDestinationIndex].transform.position;
+=======
+    void FindNextPoint()
+    {
+        nextDestination = wanderPoints[currentDestinationIndex].transform.position;
+        Debug.Log(nextDestination);
+>>>>>>> Stashed changes
 
     //     currentDestinationIndex = (currentDestinationIndex + 1) % wanderPoints.Length;
     // }
