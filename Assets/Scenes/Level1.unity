@@ -2524,6 +2524,7 @@ MonoBehaviour:
   receptionistPrefab: {fileID: 5294583595884970802, guid: f95ddc5f34cd34d4093681d01c52bba4, type: 3}
   sword: {fileID: 1316848406}
   firstEnemyPrefab: {fileID: 6439235103341380968, guid: 09ffb761bd8c4964cbb5303d5e73cade, type: 3}
+  talkSFX: {fileID: 8300000, guid: ac17f22af113ba6458d4f9f4955ea450, type: 3}
 --- !u!4 &392725714
 Transform:
   m_ObjectHideFlags: 0
