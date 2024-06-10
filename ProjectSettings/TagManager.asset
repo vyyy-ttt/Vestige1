@@ -11,6 +11,9 @@ TagManager:
   - InDoor
   - Sword
   - WanderPoint
+  - MoveToward
+  - FirstEnemy
+  - Receptionist
   layers:
   - Default
   - TransparentFX
