@@ -8,11 +8,13 @@ public class PlayerSwordBehavior : MonoBehaviour
     public Transform cameraTransform;
     public static bool swordIsActive; // whether sword is out
     public static bool hasSword = false;
+    bool canSwing;
     // Start is called before the first frame update
     void Start()
     {
         // start with no sword
         bool swordIsActive = false;
+        canSwing = true;
         gameObject.transform.GetChild(2).gameObject.SetActive(swordIsActive);   
     }
 
@@ -25,12 +27,44 @@ public class PlayerSwordBehavior : MonoBehaviour
             swordIsActive = !swordIsActive;
             gameObject.transform.GetChild(2).gameObject.SetActive(swordIsActive);
         }
+        FixedUpdate();
         // play animation is sword out and click mouse button, play audio
-        if (swordIsActive && Input.GetButtonDown("Fire1"))
+        if (swordIsActive && Input.GetButtonDown("Fire1") && canSwing)
         {
             gameObject.transform.GetChild(2).GetComponent<Animator>().SetTrigger("SwordSwung");
             gameObject.transform.GetChild(2).GetComponent<Animator>().SetTrigger("SwordReturned");
             AudioSource.PlayClipAtPoint(slashSFX, cameraTransform.position);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        ReticleEffectNPCs();
+    }
+
+    void ReticleEffectNPCs()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(gameObject.transform.position, cameraTransform.forward, out hit, 3))
+        {
+            if (hit.collider.CompareTag("NPC") || hit.collider.CompareTag("Receptionist"))
+            {
+                canSwing = false;
+                if (hit.collider.CompareTag("NPC") && Input.GetKeyDown(KeyCode.E))
+                {
+                    Debug.Log("dialogue 1");
+                    //hit.collider.transform.LookAt(gameObject.transform.GetChild(0).gameObject.transform);
+                    FindObjectOfType<StoryManager>().GetNPCDialogue();
+                }
+            }
+            else
+            {
+                canSwing = true;
+            }
+        }
+        else
+        {
+            canSwing = true;
         }
     }
 }

@@ -57,7 +57,7 @@ public class GhostEnemyAI : MonoBehaviour
         elapsedTime += Time.deltaTime;
     }
 
-    private void Initialize()
+    void Initialize()
     {
         currentState = FSMStates.Patrol;
         FindNextPoint();
@@ -67,7 +67,8 @@ public class GhostEnemyAI : MonoBehaviour
     }
     void UpdatePatrolState()
     {
-        print("Patrolling!");
+        //print("Patrolling!");
+        //Debug.Log(distanceToPlayer);
 
         if(Vector3.Distance(transform.position, nextDestination) < 1)
         {
@@ -89,11 +90,11 @@ public class GhostEnemyAI : MonoBehaviour
 
         nextDestination = player.transform.position;
 
-        if(distanceToPlayer <= attackDistance)
-        {
-            currentState = FSMStates.Attack;
-        }
-        else if(distanceToPlayer > chaseDistance)
+        // if(distanceToPlayer <= attackDistance) // disable to switch to attack for now
+        // {
+        //     currentState = FSMStates.Attack;
+        // }
+        if(distanceToPlayer > chaseDistance)
         {
             currentState = FSMStates.Patrol;
         }
@@ -104,7 +105,7 @@ public class GhostEnemyAI : MonoBehaviour
     }
     void UpdateAttackState()
     {
-        print("attack");
+        //print("attack");
 
         nextDestination = player.transform.position;
 
@@ -123,8 +124,6 @@ public class GhostEnemyAI : MonoBehaviour
         }
         
         FaceTarget(nextDestination);
-
-        EnemySpellCast(); // make this into attack
 
     }
     void UpdateDeadState()
@@ -146,13 +145,6 @@ public class GhostEnemyAI : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(directionToTarget);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 10 * Time.deltaTime);
     }
-
-    void EnemySpellCast()
-    {
-
-
-    }
-
 
     private void OnDrawGizmos()
     {

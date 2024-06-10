@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     public int startingHealth = 100;
-    public AudioClip deadSFX;
+    public AudioClip hurtSFX;
     public Slider healthSlider;
     int currentHealth;
 
@@ -26,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
     // take damage, modify slider
     public void PlayerTakesDamage(int damageAmount)
     {
+        AudioSource.PlayClipAtPoint(hurtSFX, GameObject.FindGameObjectWithTag("MainCamera").transform.position);
         if (currentHealth > 0)
         {
             currentHealth -= damageAmount;
