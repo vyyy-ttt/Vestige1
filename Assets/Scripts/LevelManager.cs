@@ -14,12 +14,14 @@ public class LevelManager : MonoBehaviour
     public string nextLevel;
     public static int totalMemories = 0;
     public Text memoryCount;
+    public static bool hasTriedElevator;
 
     void Start()
     {
         // game is not over upon starting
         isGameOver = false;
         totalMemories = 0;
+        hasTriedElevator = false;
         //gameText.gameObject.SetActive(false);
         //totalMemories = 0;
         //memoryCount.text = "memories: " + totalMemories; 
@@ -84,8 +86,25 @@ public class LevelManager : MonoBehaviour
     {
         totalMemories++;
         Debug.Log(totalMemories);
-
-        memoryCount.text = "memories: " + totalMemories;
+        if (hasTriedElevator)
+        {
+            memoryCount.text = "memories: " + totalMemories + "   remaining: " + (6-totalMemories);
+        }
+        else
+        {
+            memoryCount.text = "memories: " + totalMemories;
+        }
         Debug.Log(memoryCount.text);
+    }
+    public void UpdateMemoryText()
+    {
+        if (hasTriedElevator)
+        {
+            memoryCount.text = "memories: " + totalMemories + "   remaining: " + (6 - totalMemories);
+        }
+        else
+        {
+            memoryCount.text = "memories: " + totalMemories;
+        }
     }
 }
