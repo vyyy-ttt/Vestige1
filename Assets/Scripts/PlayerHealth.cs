@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     public int startingHealth = 100;
-    public AudioClip deadSFX;
+    public AudioClip hurtSFX;
     public Slider healthSlider;
     int currentHealth;
 
@@ -23,8 +23,10 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
-    public void TakeDamage(int damageAmount)
+    // take damage, modify slider
+    public void PlayerTakesDamage(int damageAmount)
     {
+        AudioSource.PlayClipAtPoint(hurtSFX, GameObject.FindGameObjectWithTag("MainCamera").transform.position);
         if (currentHealth > 0)
         {
             currentHealth -= damageAmount;
@@ -34,17 +36,19 @@ public class PlayerHealth : MonoBehaviour
         {
             PlayerDies();
         }
-
         Debug.Log("Current health: " + currentHealth);
     }
 
+    // rotoate player upon death, LevelLost()
     void PlayerDies()
     {
-        Debug.Log("Player is dead...");
-        AudioSource.PlayClipAtPoint(deadSFX, transform.position);
+        Debug.Log("Player ran away...");
+        //AudioSource.PlayClipAtPoint(deadSFX, transform.position);
         transform.Rotate(-90, 0, 0, Space.Self); // Space.Self, according to local rotation
+        FindObjectOfType<LevelManager>().LevelLost();
     }
 
+    // increase player health, modify slider
     public void TakeHealth(int healthAmount)
     {
         if (currentHealth < 100)
@@ -52,7 +56,6 @@ public class PlayerHealth : MonoBehaviour
             currentHealth += healthAmount;
             healthSlider.value = Mathf.Clamp(currentHealth, 0, 100); // so we don't overflow
         }
-
         Debug.Log("Current health with loot: " + currentHealth);
     }
 }
