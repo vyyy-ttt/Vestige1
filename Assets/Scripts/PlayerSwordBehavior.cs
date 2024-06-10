@@ -27,7 +27,7 @@ public class PlayerSwordBehavior : MonoBehaviour
             swordIsActive = !swordIsActive;
             gameObject.transform.GetChild(2).gameObject.SetActive(swordIsActive);
         }
-        ReticleEffectNPCs();
+        FixedUpdate();
         // play animation is sword out and click mouse button, play audio
         if (swordIsActive && Input.GetButtonDown("Fire1") && canSwing)
         {
@@ -36,12 +36,11 @@ public class PlayerSwordBehavior : MonoBehaviour
             AudioSource.PlayClipAtPoint(slashSFX, cameraTransform.position);
         }
     }
-    /*
-    // to not swing when not wanted
+
     private void FixedUpdate()
     {
         ReticleEffectNPCs();
-    }*/
+    }
 
     void ReticleEffectNPCs()
     {

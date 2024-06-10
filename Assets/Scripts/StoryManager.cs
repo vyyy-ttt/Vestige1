@@ -33,6 +33,7 @@ public class StoryManager : MonoBehaviour
 
     Animator recepAnim;
     Animator firstEnemyAnim;
+    public AudioClip talkSFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -168,6 +169,7 @@ public class StoryManager : MonoBehaviour
         dialogueText.text = dialogue[dialogueIndex++];
         dialogueBox.enabled = true;
         waitingForE = true;
+        AudioSource.PlayClipAtPoint(talkSFX, GameObject.FindGameObjectWithTag("MainCamera").transform.position);
     }
 
     public void NextLine()
@@ -389,6 +391,11 @@ public class StoryManager : MonoBehaviour
             dialogueBox.enabled = true; // consider putting this at end of 2
             dialogueText.enabled = true;
         }
+
+        if (dialogueBox.enabled == true)
+        {
+            AudioSource.PlayClipAtPoint(talkSFX, GameObject.FindGameObjectWithTag("MainCamera").transform.position);
+        }
         //else (dialogueIndex == )
         //{
         //}
@@ -500,6 +507,7 @@ public class StoryManager : MonoBehaviour
     
     public void GetNPCDialogue()
     {
+        AudioSource.PlayClipAtPoint(talkSFX, GameObject.FindGameObjectWithTag("MainCamera").transform.position);
         Debug.Log("dialogue");
         PlayerController.pauseMovement = true;
         dialogueText.text = miscNPC[Random.Range(2, 8)];
@@ -511,6 +519,7 @@ public class StoryManager : MonoBehaviour
 
     public void ElevatorDialogue()
     {
+        AudioSource.PlayClipAtPoint(talkSFX, GameObject.FindGameObjectWithTag("MainCamera").transform.position);
         PlayerController.pauseMovement = true;
         dialogueText.text = miscNPC[0];
         dialogueBox.enabled = true;
