@@ -4,6 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
+  - InDoor
+  - OutDoor
+  - WanderPoint
+=======
   - NPC
   - Enemy
   - Door
@@ -14,6 +19,7 @@ TagManager:
   - MoveToward
   - FirstEnemy
   - Receptionist
+>>>>>>> main
   layers:
   - Default
   - TransparentFX

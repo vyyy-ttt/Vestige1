@@ -28,8 +28,11 @@ public class GhostEnemyAI : MonoBehaviour
     int currentDestinationIndex = 0;
     void Start()
     {
-        
-       Initialize();
+        wanderPoints = GameObject.FindGameObjectsWithTag("WanderPoint");
+        player = GameObject.FindGameObjectWithTag("Player");
+       currentState = FSMStates.Patrol;
+        FindNextPoint();
+
 
     }
 
@@ -57,14 +60,6 @@ public class GhostEnemyAI : MonoBehaviour
         elapsedTime += Time.deltaTime;
     }
 
-    void Initialize()
-    {
-        currentState = FSMStates.Patrol;
-        FindNextPoint();
-
-        wanderPoints = GameObject.FindGameObjectsWithTag("WanderPoint");
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
     void UpdatePatrolState()
     {
         //print("Patrolling!");
