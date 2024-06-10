@@ -28,10 +28,6 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (seenPlayer)
         {
-<<<<<<< Updated upstream
-=======
-            PlayerAttack.disableTeleport = false;
->>>>>>> Stashed changes
             transform.LookAt(playerMoveToward);
             var step = moveSpeed * Time.deltaTime;
             var distance = (transform.position - playerMoveToward.position).magnitude;
