@@ -28,31 +28,33 @@ public class MemoryPickUpBehavior : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             FindObjectOfType<LevelManager>().UpdateMemoryCountText();
-            // if(levelManager.nextLevel == "Level4")
-            // {
-            //     AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
-            //     Destroy(gameObject);
-            // }
-            // if (gameObject.CompareTag("Sword"))
-            // {
-            //     other.gameObject.transform.GetChild(2).gameObject.SetActive(true);
-            //     PlayerSwordBehavior.swordIsActive = true;
-            //     PlayerSwordBehavior.hasSword = true;
-            //     PlayerController.pauseMovement = true;
-            //     FirstEnemyScript.seenPlayer = false;
-            //     FindObjectOfType<StoryManager>().NextLine();
-            // }
-            // if (levelManager.nextLevel == "Level2")
-            // {
-            //     if (StoryManager.getFirstMemories)
-            //     {
-            //         FindObjectOfType<StoryManager>().FirstMemoriesDialogue();
-            //     }
-            //     else
-            //     {
-            //         FindObjectOfType<StoryManager>().LastMemoryDialogue();
-            //     }
-            // }
+            /*if(LevelManager.nextLevel == "Level4")
+            {
+                 AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
+                 Destroy(gameObject);
+            }*/
+            if (gameObject.CompareTag("Sword"))
+            {
+                 other.gameObject.transform.GetChild(2).gameObject.SetActive(true);
+                 PlayerSwordBehavior.swordIsActive = true;
+                 PlayerSwordBehavior.hasSword = true;
+                 PlayerController.pauseMovement = true;
+                 FirstEnemyScript.seenPlayer = false;
+                 FindObjectOfType<StoryManager>().NextLine();
+            }
+            //if (levelManager.nextLevel == "Level2")
+            //{
+            else 
+            { 
+                if (StoryManager.getFirstMemories)
+                {
+                    FindObjectOfType<StoryManager>().FirstMemoriesDialogue();
+                }
+                else
+                {
+                    FindObjectOfType<StoryManager>().LastMemoryDialogue();
+                }
+            }
             AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
             Destroy(gameObject);
         }

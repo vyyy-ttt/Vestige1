@@ -5135,7 +5135,6 @@ MonoBehaviour:
   chaseDistance: 4
   enemySpeed: 3
   player: {fileID: 571348211}
-  shootRate: 2
 --- !u!1001 &695982681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6657,7 +6656,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 988593319}
-  - component: {fileID: 988593320}
   - component: {fileID: 988593321}
   m_Layer: 0
   m_Name: LevelManager
@@ -6681,18 +6679,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &988593320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988593318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1024771df7bb743f1b6e43b2d3ad85e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &988593321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6707,6 +6693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextLevel: Level2
   memoryCount: {fileID: 107887534}
+  memoryInfo: {fileID: 0}
 --- !u!1 &994235079
 GameObject:
   m_ObjectHideFlags: 0
