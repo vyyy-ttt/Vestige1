@@ -128,6 +128,7 @@ MonoBehaviour:
   jumpHeight: 10
   gravity: 9.81
   airControl: 10
+  jumpSFX: {fileID: 0}
 --- !u!143 &9191111479378380312
 CharacterController:
   m_ObjectHideFlags: 0
@@ -167,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 100
-  deadSFX: {fileID: 0}
+  hurtSFX: {fileID: 0}
   healthSlider: {fileID: 0}
 --- !u!1 &6543244896374769637
 GameObject:
@@ -183,7 +184,7 @@ GameObject:
   - component: {fileID: 1658920351326532892}
   m_Layer: 0
   m_Name: MoveToward
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
