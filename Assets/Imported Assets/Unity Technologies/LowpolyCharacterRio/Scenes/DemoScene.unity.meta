@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/level3/DoorPackFree 2.meta
+guid: 9d5d6d21cda874a5c82309a023d87b6c
+folderAsset: yes
+========
 guid: 99c9720ab356a0642a771bea13969a05
+>>>>>>>> main:Assets/Imported Assets/Unity Technologies/LowpolyCharacterRio/Scenes/DemoScene.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotatePickups : MonoBehaviour
+public class MemoryRotate : MonoBehaviour
 {
     public float rotationAmount = 45f;
     void Start()
