@@ -26,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
     // take damage, modify slider
     public void PlayerTakesDamage(int damageAmount)
     {
+        Debug.Log("Player takes damage: " + damageAmount);
         AudioSource.PlayClipAtPoint(hurtSFX, GameObject.FindGameObjectWithTag("MainCamera").transform.position);
         if (currentHealth > 0)
         {

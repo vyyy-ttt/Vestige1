@@ -3,7 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - NPC
+  - Enemy
+  - Door
+  - OutDoor
+  - InDoor
+  - Sword
+  - WanderPoint
+  - MoveToward
+  - FirstEnemy
+  - Receptionist
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -11,7 +22,6 @@ TagManager:
   - 
   - Water
   - UI
-  - 
   - 
   - 
   - 
