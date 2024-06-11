@@ -22,7 +22,6 @@ public class GhostEnemyAI : MonoBehaviour
     GameObject[] wanderPoints;
     Vector3 nextDestination;
     float distanceToPlayer;
-    public float shootRate = 2;
     float elapsedTime = 0;
 
     int currentDestinationIndex = 0;

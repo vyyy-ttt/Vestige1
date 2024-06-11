@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MemoryRotate : MonoBehaviour
+public class LevelThreeMemories : MonoBehaviour
 {
-    public float rotationAmount = 45f;
+    // Start is called before the first frame update
     void Start()
     {
         
@@ -13,6 +13,6 @@ public class MemoryRotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(Vector3.up * rotationAmount * Time.deltaTime);
+        
     }
 }

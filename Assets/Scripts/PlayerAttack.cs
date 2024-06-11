@@ -15,6 +15,8 @@ public class PlayerAttack : MonoBehaviour
     public static bool disableTeleport;
     private MouseLook mouseLook;
 
+    private GhostEnemyAI ghostAI;
+
     // story triggers
     public Transform receptionist;
     static bool doorMessage;
@@ -32,6 +34,7 @@ public class PlayerAttack : MonoBehaviour
         originalReticleColor = Color.white;
         weaponDamage = 20;
         mouseLook = GetComponent<MouseLook>();
+        ghostAI = GetComponent<GhostEnemyAI>();
     }
 
     // Update is called once per frame
@@ -103,7 +106,7 @@ public class PlayerAttack : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, 2))
         {
             // immediate kill if crouching when attacking
-            if(MouseLook.isCrouching && hit.collider.CompareTag("Enemy") && PlayerSwordBehavior.swordIsActive && Input.GetButtonDown("Fire1"))
+            if(MouseLook.isCrouching && hit.collider.CompareTag("Enemy") && PlayerSwordBehavior.swordIsActive && Input.GetButtonDown("Fire1") && ghostAI.currentState == GhostEnemyAI.FSMStates.Patrol) // and in patrol mode
             {
                 Debug.Log("enemy died hopefully");
                 FindObjectOfType<EnemyBehavior>().EnemyTakesDamage(100);
