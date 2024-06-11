@@ -31,10 +31,11 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        /*
+        if (nextLevel == "Level4" && Input.GetKeyDown(KeyCode.E))
         {
             memoryInfo.gameObject.SetActive(false);
-        }
+        }*/
     }
 
     // called when health reaches 0
@@ -90,10 +91,11 @@ public class LevelManager : MonoBehaviour
     public void UpdateMemoryCountText()
     {
         totalMemories++;
-        memoryInfo.gameObject.SetActive(true);
+       /*
         if(nextLevel == "Level4") // checking if level 3
         {
-            if(totalMemories == 0)
+            memoryInfo.gameObject.SetActive(true);
+            if (totalMemories == 0)
             {
                 memoryInfo.text = "You pick up a pair of gold bands – wedding rings – with ‘C&S 6/7/17 engraved on the inside.";
             }
@@ -118,6 +120,7 @@ public class LevelManager : MonoBehaviour
                 memoryInfo.text = "You pick up a plain business card. It looks worn and bent, as if someone kept it in their pocket for a while forgotten about. No writing printed on it, just a phone number scribbled out. You wonder if you've ever called it...";
             }
         }
+        */
         Debug.Log(totalMemories);
         if (hasTriedElevator)
         {
