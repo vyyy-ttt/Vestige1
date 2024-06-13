@@ -7,120 +7,100 @@ public class StoryManager2 : MonoBehaviour
 {
     public Image dialogueBox;
     public Text dialogueText;
-    public Text NPCsCountText;
-    public Text memoriesCountText;
-    public Transform cameraTransform;
 
-    //public GameObject sword;
+    int dialogueIndex;
+    bool waitingForE;
 
-    public GameObject NPC1;
-    public GameObject NPC2;
-    public GameObject NPC3;
+    public GameObject sword;
 
-    int npcInteractionCount;
-    int memoriesCount;
-    
-    int memoriesIndex;
-
-    bool inDialogue;
-    bool talkedToNPC1;
-    bool talkedToNPC2;
-    bool talkedToNPC3;
+    bool inMiscDialogue;
+    bool talkingToNPC;
 
     void Start()
     {
-        //sword.SetActive(false);
+        sword.SetActive(false);
+        waitingForE = false;
         dialogueBox.enabled = false;
-        dialogueText.enabled = false;
-        PlayerController.pauseMovement = false;
-        npcInteractionCount = 0;
-        memoriesCount = 0;
-        memoriesIndex = 0;
-        inDialogue = false;
-        talkedToNPC1 = false;
-        talkedToNPC2 = false;
-        talkedToNPC3 = false;
-        Invoke("StartScene", 2);
+        PlayerController.pauseMovement = true;
+        dialogueIndex = 0;
+        inMiscDialogue = false;
+        talkingToNPC = false;
+        Invoke("StartSequence", 1);
     }
 
     void Update()
     {
-        if (!inDialogue && Input.GetKeyDown(KeyCode.E))
+        if (waitingForE && Input.GetKeyDown(KeyCode.E))
         {
-            GetNPCDialogue();
+            if (!inMiscDialogue)
+            {
+                NextLine();
+            }
+            else if (talkingToNPC)
+            {
+                Debug.Log("dismiss");
+                dialogueBox.enabled = false;
+                dialogueText.enabled = false;
+                waitingForE = false;
+                PlayerController.pauseMovement = false;
+                talkingToNPC = false;
+            }
         }
-
-        if (inDialogue && Input.GetKeyDown(KeyCode.E))
-        {
-            dialogueBox.enabled = false;
-            dialogueText.enabled = false;
-            PlayerController.pauseMovement = false;
-            inDialogue = false;
-        }
-
-        NPCsCountText.text = "NPCs Talked To: " + npcInteractionCount + "/3";
-        memoriesCountText.text = "Memories: " + memoriesCount + "/3";
+        //NPCsCountText.text = "NPCs Talked To: " + npcInteractionCount + "/3";
+        //memoriesCountText.text = "Memories: " + memoriesCount + "/3";
     }
 
-    // Player's inner monologue at the very start of the level
-    void StartScene()
+    void StartSequence()
     {
-        PlayerController.pauseMovement = true;
+        // start at index 0, show message 0; shows player's inner monologue at the beginning of the level
+        dialogueText.text = miscDialogue[dialogueIndex];
         dialogueBox.enabled = true;
-        dialogueText.enabled = true;
-        inDialogue = true;
-        dialogueText.text = playerMonologue[0];
+        waitingForE = true;
+    }
+
+    public void NextLine()
+    {
+        if (dialogueIndex == 0)
+        {
+            waitingForE = false;
+            dialogueBox.enabled = false;
+            dialogueText.enabled = false;
+            waitingForE = true;
+            PlayerController.pauseMovement = false;
+        }
+        else
+        {
+            waitingForE = true;
+            dialogueText.text = miscDialogue[dialogueIndex];
+            dialogueBox.enabled = true;
+            dialogueText.enabled = true;
+        }
+    }
+
+    void SetWaitForE()
+    {
+        waitingForE = true;
     }
 
     public void GetNPCDialogue()
     {
-        Debug.Log("got inside the function!");
-
-        RaycastHit hit;
-        if (Physics.Raycast(gameObject.transform.position, cameraTransform.forward, out hit, 3) && Input.GetKeyDown(KeyCode.E))
-        {
-            Debug.Log("got to hit!");
-            if (hit.collider.gameObject == NPC1)
-            {
-                Debug.Log("got to 1!");
-                PlayerController.pauseMovement = true;
-                dialogueBox.enabled = true;
-                inDialogue = true;
-                dialogueText.text = npcDialogue[0];
-                if (!talkedToNPC1)
-                {
-                    talkedToNPC1 = true;
-                    npcInteractionCount++;
-                }
-            }
-            else if (hit.collider.gameObject == NPC2)
-            {
-                PlayerController.pauseMovement = true;
-                dialogueBox.enabled = true;
-                inDialogue = true;
-                dialogueText.text = npcDialogue[1];
-                if (!talkedToNPC2)
-                {
-                    talkedToNPC2 = true;
-                    npcInteractionCount++;
-                }
-            }
-            else if (hit.collider.gameObject == NPC3)
-            {
-                PlayerController.pauseMovement = true;
-                dialogueBox.enabled = true;
-                inDialogue = true;
-                dialogueText.text = npcDialogue[2];
-                if (!talkedToNPC3)
-                {
-                    talkedToNPC3 = true;
-                    npcInteractionCount++;
-                }
-            }
-        }
+        Debug.Log("in getnpcdialogue");
+        PlayerController.pauseMovement = true;
+        Debug.Log("pausemovement should be true");
+        dialogueText.text = npcDialogue[Random.Range(0, 6)];
+        Debug.Log("dtext should be set to a dline");
+        dialogueBox.enabled = true;
+        Debug.Log("dbox should be enabled");
+        dialogueText.enabled = true;
+        Debug.Log("dtext should be enabled");
+        talkingToNPC = true;
+        Debug.Log("talkingtonpc should be true");
+        Invoke("SetWaitForE", 1);
+        Debug.Log("invoking setwaitfore");
     }
 
-    private readonly string[] playerMonologue =
+    // Player's inner monologue at the beginning of the level.
+    private readonly string[] miscDialogue =
     {
         "[A ballroom? There's so many other ghosts here...]"
     };
@@ -136,6 +116,9 @@ public class StoryManager2 : MonoBehaviour
     {
         "I wonder what this room looks like to you. You know rooms here are different for everyone. I see a big train station. I wonder if I traveled a lot?",
         "Time is weird here. Some souls show up soon after dying, some show up much later. No idea why. My sister and I died at the same time, but she got here later than me. Now she's already in the afterlife.",
-        "I don't know why some souls come here first instead of straight to the afterlife. Probably has something to do with what we did when we were alive. But I hardly remember."
+        "I don't know why some souls come here first instead of straight to the afterlife. Probably has something to do with what we did when we were alive. But I hardly remember.",
+        "I wish I could still understand my memories. An acorn here, a ribbon there. At this point, I have no idea what they mean anymore.",
+        "You trying to get to the afterlife? That’s a hard road. I had to give up. The memories were too painful.",
+        "Why do they make us go through all these trials, aren't we all going to end up in the afterlife anyway?"
     };
 }

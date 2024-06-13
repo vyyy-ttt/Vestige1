@@ -9,23 +9,28 @@ public class NPCInteraction : MonoBehaviour
 
     public Image dialogueBox;
     public Text dialogueText;
-    public Text npcsCountText;
+    //public Text npcsCountText;
 
-    float interactionDistance = 3.0f;
-    int dialogueIndex = 0;
-    int npcsCount;
+    public string[] lines = new string[1];
+
+    //float interactionDistance = 3.0f;
+    //int dialogueIndex = 0;
+    //int npcsCount;
     bool inDialogue;
+    bool playerInRange;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        dialogueIndex = 0;
-        npcsCount = 0;
+        //dialogueIndex = 0;
+        //npcsCount = 0;
         inDialogue = false;
+        playerInRange = false;
     }
 
     void Update()
     {   
+        /*
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 
         if (distanceToPlayer <= interactionDistance && Input.GetKeyDown(KeyCode.F) && npcsCount != 3)
@@ -41,6 +46,47 @@ public class NPCInteraction : MonoBehaviour
             dialogueIndex++;
         }
         npcsCountText.text = "NPCs Talked To: " + npcsCount + "/3";
+        */
+
+        if (playerInRange && Input.GetKeyDown(KeyCode.F) && !inDialogue)
+        {
+            ToggleDialogue();
+        }
+
+        if (inDialogue && Input.GetKeyDown(KeyCode.F))
+        {
+            ExitDialogue();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Player collided into NPC");
+        
+        if (other.gameObject.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+        
+        /*
+        if (other.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.Log("Player hit F key");
+            ToggleDialogue();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                ExitDialogue();
+            }
+        }
+        */
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
     }
 
     void ToggleDialogue()
@@ -49,8 +95,19 @@ public class NPCInteraction : MonoBehaviour
         dialogueBox.enabled = true;
         dialogueText.enabled = true;
 
-        dialogueText.text = npcDialogue[dialogueIndex];
-        npcsCount++;
+        PlayerController.pauseMovement = true;
+
+        dialogueText.text = lines[0];
+        //npcsCount++;
+    }
+
+    void ExitDialogue()
+    {
+        inDialogue = false;
+        dialogueBox.enabled = false;
+        dialogueText.enabled = false;
+
+        PlayerController.pauseMovement = false;
     }
 
     private readonly string[] npcDialogue =
