@@ -7,6 +7,9 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab;
     public float spawnTime = 5;
 
+    public int repeatCount = 5;
+    public float interval = 15f;
+
     public float xMin = -14f;
     public float xMax = 12f;
     public float yMin = 3.75f;
@@ -18,7 +21,8 @@ public class EnemySpawner : MonoBehaviour
     {
         if (!LevelManager.isGameOver)
         {
-            InvokeRepeating("SpawnEnemies", spawnTime, spawnTime);
+            //InvokeRepeating("SpawnEnemies", spawnTime, spawnTime);
+            StartCoroutine(RepeatFunctionCoroutine(repeatCount, interval));
         }
     }
 
@@ -26,6 +30,15 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         
+    }
+
+    IEnumerator RepeatFunctionCoroutine(int count, float interval)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            SpawnEnemies();
+            yield return new WaitForSeconds(interval);
+        }
     }
 
     void SpawnEnemies()
