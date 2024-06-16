@@ -7,7 +7,7 @@ public class MouseLook : MonoBehaviour
 {
     Transform playerBody;
     private float normalCamHeight;
-    public float mouseSensitivity 100f;
+    public float mouseSensitivity = 100f;
     public float cameraHeightAdjustSpeed = 2f;
     public static bool isCrouching = false;
     
