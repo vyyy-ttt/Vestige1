@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public int startingHealth = 100;
     public AudioClip hurtSFX;
     public Slider healthSlider;
-    int currentHealth;
+    public int currentHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +56,7 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth += healthAmount;
             healthSlider.value = Mathf.Clamp(currentHealth, 0, 100); // so we don't overflow
+            healthSlider.value = currentHealth;
         }
         Debug.Log("Current health with loot: " + currentHealth);
     }

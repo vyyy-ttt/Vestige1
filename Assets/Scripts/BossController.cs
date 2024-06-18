@@ -25,7 +25,6 @@ public class BossController : MonoBehaviour
         if (playerObject != null)
         {
             player = playerObject.transform;
-            Debug.Log("Player object found: " + player.name);
         }
         else
         {
@@ -36,18 +35,6 @@ public class BossController : MonoBehaviour
         if (navMeshAgent == null)
         {
             Debug.LogError("NavMeshAgent component not found on Boss object.");
-        }
-
-        if (!navMeshAgent.isOnNavMesh)
-        {
-            if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 5.0f, NavMesh.AllAreas))
-            {
-                navMeshAgent.Warp(hit.position);
-            }
-            else
-            {
-                Debug.LogError("Boss cannot be repositioned to a valid NavMesh position.");
-            }
         }
 
         lastAttackTime = -attackCooldown;
@@ -62,7 +49,7 @@ public class BossController : MonoBehaviour
         if (distance <= detectRange)
         {
             ChasePlayer();
-            if (Time.time - lastAttackTime >= attackCooldown)
+            if (distance <= navMeshAgent.stoppingDistance && Time.time - lastAttackTime >= attackCooldown && !PlayerBehindWall())
             {
                 AttackPlayer();
             }
@@ -90,27 +77,19 @@ public class BossController : MonoBehaviour
 
     void AttackPlayer()
     {
-        if (player == null || PlayerBehindWall() || navMeshAgent == null)
-        {
-            return;
-        }
+        if (player == null) return;
 
         lastAttackTime = Time.time;
         int damage = isHuman ? humanDamage : ghostDamage;
 
-        if (player != null)
+        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+        if (playerHealth != null)
         {
-            Debug.Log("Attempting to get PlayerHealth component on: " + player.name);
-            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
-            {
-                Debug.Log("PlayerHealth component found. Applying damage.");
-                playerHealth.PlayerTakesDamage(damage); 
-            }
-            else
-            {
-                Debug.LogError("PlayerHealth component not found on player object.");
-            }
+            playerHealth.PlayerTakesDamage(damage);
+        }
+        else
+        {
+            Debug.LogError("PlayerHealth component not found on player object.");
         }
     }
 
