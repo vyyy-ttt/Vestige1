@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 325004848418200873}
   - component: {fileID: 2805331483351857884}
   - component: {fileID: 9172339336566816402}
-  - component: {fileID: 8177198227383387032}
-  - component: {fileID: 4537590922631603415}
+  - component: {fileID: -3218405847943016803}
+  - component: {fileID: 9027472843819737428}
   m_Layer: 0
   m_Name: Memory
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2843096979163391511}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.9801793, y: 1.8157496, z: 11.646118}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
@@ -107,7 +107,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.8636646, y: 2.5445151, z: 2.653236}
   m_Center: {x: -0.00000017881393, y: 1.3988607, z: -0.00000017881393}
---- !u!114 &8177198227383387032
+--- !u!114 &-3218405847943016803
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationAmount: 45
---- !u!114 &4537590922631603415
+--- !u!114 &9027472843819737428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,3 +132,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00aeafb4a55dc4fac989592ff07af2a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupSFX: {fileID: 8300000, guid: f0f2fa2742aeac04392217674b3ceb84, type: 3}
+  cameraTransform: {fileID: 0}

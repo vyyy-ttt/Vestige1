@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MouseLook : MonoBehaviour
 {
     Transform playerBody;
     private float normalCamHeight;
-    public float mouseSensitivity = 100f;
+    public float mouseSensitivity 100f;
     public float cameraHeightAdjustSpeed = 2f;
     public static bool isCrouching = false;
+    
 
     float pitch = 0;
     void Start()
@@ -20,6 +22,7 @@ public class MouseLook : MonoBehaviour
         // deal with cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
     // Update is called once per frame

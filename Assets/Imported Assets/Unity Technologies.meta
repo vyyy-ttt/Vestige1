@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/wanderpoint 2.prefab.meta
+guid: 5e523a8c9a6b34cdea3a2f1cb064aef8
+PrefabImporter:
+========
 guid: ccea643e5472f48d5ae5b876e1520524
 folderAsset: yes
 DefaultImporter:
+>>>>>>>> main:Assets/Imported Assets/Unity Technologies.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
