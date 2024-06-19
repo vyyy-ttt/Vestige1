@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MemoryPickUpBehavior : MonoBehaviour
 {
@@ -9,10 +10,13 @@ public class MemoryPickUpBehavior : MonoBehaviour
     public Transform cameraTransform;
     private bool bonusActive;
     private LevelManager levelManager;
+    private bool isLevelThree;
+
     void Start()
     {
         PlayerSwordBehavior.swordIsActive = false;
         levelManager = GetComponent<LevelManager>();
+        isLevelThree = SceneManager.GetActiveScene().name == "Level3";
 
     }
 
@@ -28,11 +32,12 @@ public class MemoryPickUpBehavior : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             FindObjectOfType<LevelManager>().UpdateMemoryCountText();
-            /*if(LevelManager.nextLevel == "Level4")
+            // comment out if issue \/\/
+            if(isLevelThree)
             {
                  AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
                  Destroy(gameObject);
-            }*/
+            }
             if (gameObject.CompareTag("Sword"))
             {
                  other.gameObject.transform.GetChild(2).gameObject.SetActive(true);
