@@ -2645,9 +2645,11 @@ MonoBehaviour:
   dialogueText: {fileID: 2083088748}
   receptionistObject: {fileID: 1344402476}
   player: {fileID: 1167157766}
+  healthSlider: {fileID: 762468529}
   receptionistPrefab: {fileID: 5294583595884970802, guid: f95ddc5f34cd34d4093681d01c52bba4, type: 3}
   sword: {fileID: 1316848406}
   firstEnemyPrefab: {fileID: 6439235103341380968, guid: 09ffb761bd8c4964cbb5303d5e73cade, type: 3}
+  blankMemoryPrefab: {fileID: 0}
   talkSFX: {fileID: 8300000, guid: ac17f22af113ba6458d4f9f4955ea450, type: 3}
 --- !u!4 &392725714
 Transform:
@@ -6693,7 +6695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextLevel: Level2
   memoryCount: {fileID: 107887534}
-  memoryInfo: {fileID: 0}
+  memoryInfo: {fileID: 2083088748}
 --- !u!1 &994235079
 GameObject:
   m_ObjectHideFlags: 0
@@ -15466,6 +15468,10 @@ PrefabInstance:
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 1093559905}
+    - target: {fileID: 3580169177569508560, guid: 09ffb761bd8c4964cbb5303d5e73cade, type: 3}
+      propertyPath: firstEnemyPrefab
+      value: 
+      objectReference: {fileID: 6439235103341380968, guid: 09ffb761bd8c4964cbb5303d5e73cade, type: 3}
     - target: {fileID: 3580169177569508560, guid: 09ffb761bd8c4964cbb5303d5e73cade, type: 3}
       propertyPath: playerMoveToward
       value: 
