@@ -147,8 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthAmount: 15
-  pickupSFX: {fileID: 8300000, guid: f0f2fa2742aeac04392217674b3ceb84, type: 3}
-  cameraTransform: {fileID: 0}
+  healthSFX: {fileID: 8300000, guid: 7ddda707fec5bc34fad48075b20a9bfc, type: 3}
 --- !u!1 &1243225526716052140
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,8 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthAmount: 15
-  pickupSFX: {fileID: 8300000, guid: f0f2fa2742aeac04392217674b3ceb84, type: 3}
-  cameraTransform: {fileID: 0}
+  healthSFX: {fileID: 8300000, guid: 7ddda707fec5bc34fad48075b20a9bfc, type: 3}
 --- !u!1 &3765879566669140265
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,8 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthAmount: 15
-  pickupSFX: {fileID: 8300000, guid: f0f2fa2742aeac04392217674b3ceb84, type: 3}
-  cameraTransform: {fileID: 0}
+  healthSFX: {fileID: 8300000, guid: 7ddda707fec5bc34fad48075b20a9bfc, type: 3}
 --- !u!1 &3993779415383518504
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,8 +591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthAmount: 15
-  pickupSFX: {fileID: 8300000, guid: f0f2fa2742aeac04392217674b3ceb84, type: 3}
-  cameraTransform: {fileID: 0}
+  healthSFX: {fileID: 8300000, guid: 7ddda707fec5bc34fad48075b20a9bfc, type: 3}
 --- !u!1 &8492560867077331667
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,5 +775,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthAmount: 15
-  pickupSFX: {fileID: 8300000, guid: f0f2fa2742aeac04392217674b3ceb84, type: 3}
-  cameraTransform: {fileID: 0}
+  healthSFX: {fileID: 8300000, guid: 7ddda707fec5bc34fad48075b20a9bfc, type: 3}

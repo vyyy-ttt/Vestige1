@@ -6321,7 +6321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 100
-  cameraHeightAdjustSpeed: 2
+  cameraHeightAdjustSpeed: 5
 --- !u!114 &2029283243
 MonoBehaviour:
   m_ObjectHideFlags: 0
