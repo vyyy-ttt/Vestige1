@@ -12,8 +12,14 @@ public class PlayerController : MonoBehaviour
     private bool isCrouching = false;
     public AudioClip jumpSFX;
 
+    private bool isInSafeZone = false;
+    public float healRate = 10f;
+    public float health = 100f;
+    public float maxHealth = 100f;
+
     CharacterController controller;
     Vector3 input, moveDirection;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -82,5 +88,29 @@ public class PlayerController : MonoBehaviour
 
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
+
+        if (isInSafeZone)
+        {
+            HealPlayer();
+        }
     }
+
+    public void EnterSafeZone()
+    {
+        isInSafeZone = true;
+        Debug.Log("Player has entered the safe zone.");
+    }
+
+    public void ExitSafeZone()
+    {
+        isInSafeZone = false;
+        Debug.Log("Player has exited the safe zone.");
+    }
+
+    private void HealPlayer()
+    {
+        health = Mathf.Min(maxHealth, health + healRate * Time.deltaTime);
+        Debug.Log("Player is healing in the safe zone. Current health: " + health);
+    }
+
 }
