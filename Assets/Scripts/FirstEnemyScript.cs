@@ -14,7 +14,6 @@ public class FirstEnemyScript : MonoBehaviour
     public float moveSpeed = 2f;
     public float minDistance = 1f; // enemy stops here and attacks
     public int damageAmount = 20;
-    public float enemySeesPlayerDistance = 5f;
 
     // when seenPlayer, weapon becaomes active and enemy attacks, otherwise is idle
     public static bool seenPlayer;
@@ -23,16 +22,19 @@ public class FirstEnemyScript : MonoBehaviour
 
     float distance; // for calculations
     public GameObject ghostRanParticle; // particle prefab
+    //public GameObject firstEnemyPrefab;
     public GameObject lootPrefab;
     public AudioClip slashSFX;
     public AudioClip enemyDeathSFX;
     public Transform cameraTransform; // for playing audio (camera.main.transform.position giving errors)
 
+    //static bool enemyReset = false;
     // Start is called before the first frame update
     void Start()
     {
         seenPlayer = false;
         enemiesDead = false;
+        //enemyReset = false;
         healthAmount = 100;
         //if (playerMoveToward == null)
         //{
@@ -46,6 +48,7 @@ public class FirstEnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //gameObject.transform.position = new Vector3(gameObject.transform.position.x, 1.975072f, gameObject.transform.position.z);
         // if enemy sees player, look at player
         if (!enemiesDead && seenPlayer)
         {
@@ -61,21 +64,29 @@ public class FirstEnemyScript : MonoBehaviour
                     new Vector3(playerMoveToward.position.x, transform.position.y, playerMoveToward.position.z), step);
             }
         }
+        /*
         // if enemy is alive but hasn't seen player, look at player and draw weapon when 5 units close
-        /*else if (!enemiesDead)
+        else if (!enemiesDead && enemyReset)
         {
-            if ((transform.position - playerMoveToward.position).magnitude < enemySeesPlayerDistance)
+            if ((transform.position - playerMoveToward.position).magnitude < 5.5f)
             {
+                Debug.Log("seeing player");
                 seenPlayer = true;
-                gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                PlayerAttack.disableTeleport = true;
+                //gameObject.transform.GetChild(0).gameObject.SetActive(true);
                 // should play a sound effect
             }
+
+            //gameObject.transform.position = new Vector3(-1.307f, 1.975072f, 29.961f);
+            //gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
         }*/
+
     }
 
     // if enemy sees player, is alive, and close enough, swing weapon (has collider) and play sound
     void SwingWeapon()
     {
+        //var distance = (transform.position - playerMoveToward.position).magnitude;
         if (!enemiesDead && seenPlayer && distance <= minDistance)
         {
             gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("AxeSwung");
@@ -105,6 +116,19 @@ public class FirstEnemyScript : MonoBehaviour
         gameObject.SetActive(false);
         Instantiate(lootPrefab, transform.position + Vector3.up, transform.rotation);
         Destroy(gameObject, 0.5f);
-
     }
+    /*
+    // called when player dies
+    public void ResetEnemy()
+    {
+        Debug.Log("move enemy back");
+        Instantiate(firstEnemyPrefab, new Vector3(-1.307f, 1.975072f, 29.961f), Quaternion.Euler(Vector3.zero)); 
+        //gameObject.transform.position = new Vector3(-1.307f, 1.975072f, 29.961f);
+        //gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
+        seenPlayer = false;
+        enemyReset = true;
+        Destroy(gameObject);
+        // within 5.5 units
+    }
+    */
 }

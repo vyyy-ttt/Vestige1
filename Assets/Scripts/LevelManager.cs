@@ -16,6 +16,9 @@ public class LevelManager : MonoBehaviour
     public Text memoryCount;
     public Text memoryInfo;
 
+    private LevelThreeMemory levelThreeMemory;
+    private bool isLevelThree;
+
     public static bool hasTriedElevator;
 
     void Start()
@@ -24,18 +27,25 @@ public class LevelManager : MonoBehaviour
         isGameOver = false;
         totalMemories = 0;
         hasTriedElevator = false;
+        isLevelThree = SceneManager.GetActiveScene().name == "Level3";
+
         //gameText.gameObject.SetActive(false);
         //totalMemories = 0;
         //memoryCount.text = "memories: " + totalMemories; 
+        if (isLevelThree)
+        {
+            levelThreeMemory = GetComponent<LevelThreeMemory>();
+            levelThreeMemory.InitializeMemory();
+        }
     }
 
     void Update()
     {
-        /*
+        // if not working comment out it was commented out from last submission
         if (nextLevel == "Level4" && Input.GetKeyDown(KeyCode.E))
         {
             memoryInfo.gameObject.SetActive(false);
-        }*/
+        }
     }
 
     // called when health reaches 0
@@ -90,58 +100,42 @@ public class LevelManager : MonoBehaviour
 
     public void UpdateMemoryCountText()
     {
-        totalMemories++;
-       /*
-        if(nextLevel == "Level4") // checking if level 3
+        if (isLevelThree && levelThreeMemory != null)
         {
+            levelThreeMemory.UpdateMemoryCountText(memoryCount, memoryInfo);
+        }
+        // for levels 1 and 2
+        else if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2")
+        {
+            totalMemories++;
             memoryInfo.gameObject.SetActive(true);
-            if (totalMemories == 0)
+            if (hasTriedElevator)
             {
-                memoryInfo.text = "You pick up a pair of gold bands – wedding rings – with ‘C&S 6/7/17 engraved on the inside.";
+                memoryCount.text = "memories: " + totalMemories + "   remaining: " + (6 - totalMemories);
             }
-            if(totalMemories == 1)
+            else
             {
-                memoryInfo.text = "You pick up a bouquet of flowers, slightly wilted. There’s a card attached but you can’t quite make out it says. They still smell nice but you're not sure how that makes you feel.";
-            }
-            if(totalMemories == 2)
-            {
-                memoryInfo.text = "You pick up an old drawing notebook. You flip through the pages, the first few contain rudimentary sketches of still lives and anatomy studies. The rest is filled with crayon drawings of families, dogs, parks, school, friends, and the last page a teddy bear in a hospital room";
-            }
-            if(totalMemories == 3)
-            {
-                memoryInfo.text = "You pick up a pile of bills – unpaid hospital bills, late electricity payments, past due rent, etc. The words seem to blur together as you flip through the pages and it becomes harder to tell what money is owed for what by the time you reach the end of the pile";
-            }
-            if(totalMemories == 4)
-            {
-                memoryInfo.text = "You pick up card with the photo of a young girl smiling up at you. ‘In Loving Memory Emma Grace DeMarco 2017-2024’ A short Psalm expert is written on the back";
-            }
-            if(totalMemories == 5)
-            {
-                memoryInfo.text = "You pick up a plain business card. It looks worn and bent, as if someone kept it in their pocket for a while forgotten about. No writing printed on it, just a phone number scribbled out. You wonder if you've ever called it...";
+                memoryCount.text = "memories: " + totalMemories;
             }
         }
-        */
-        Debug.Log(totalMemories);
-        if (hasTriedElevator)
-        {
-            memoryCount.text = "memories: " + totalMemories + "   remaining: " + (6-totalMemories);
-        }
-        else
-        {
-            memoryCount.text = "memories: " + totalMemories;
-        }
-        Debug.Log(memoryCount.text);
-
     }
     public void UpdateMemoryText()
     {
-        if (hasTriedElevator)
+        if (isLevelThree && levelThreeMemory != null)
         {
-            memoryCount.text = "memories: " + totalMemories + "   remaining: " + (6 - totalMemories);
+            levelThreeMemory.UpdateMemoryText(memoryCount);
         }
-        else
+        // for levels 1 and 2
+        else if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2")
         {
-            memoryCount.text = "memories: " + totalMemories;
+            if (hasTriedElevator)
+            {
+                memoryCount.text = "memories: " + totalMemories + "   remaining: " + (6 - totalMemories);
+            }
+            else
+            {
+                memoryCount.text = "memories: " + totalMemories;
+            }
         }
     }
 }

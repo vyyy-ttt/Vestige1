@@ -8,7 +8,7 @@ public class MouseLook : MonoBehaviour
     Transform playerBody;
     private float normalCamHeight;
     public float mouseSensitivity = 100f;
-    public float cameraHeightAdjustSpeed = 2f;
+    public float cameraHeightAdjustSpeed = 5f;
     public static bool isCrouching = false;
     
 
@@ -18,6 +18,14 @@ public class MouseLook : MonoBehaviour
         // get player pbject and camera height
         playerBody = transform.parent.transform;
         normalCamHeight = transform.localPosition.y;
+        if (MouseSetting.mouseSensitivitySet <= 0)
+        {
+            mouseSensitivity = 100f;
+        }
+        else
+        {
+            mouseSensitivity = MouseSetting.mouseSensitivitySet;
+        }
 
         // deal with cursor
         Cursor.visible = false;

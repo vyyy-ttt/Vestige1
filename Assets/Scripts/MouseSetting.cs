@@ -2,17 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseSetting : MonoBehaviour
+public static class MouseSetting
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static float mouseSensitivitySet { get; set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
