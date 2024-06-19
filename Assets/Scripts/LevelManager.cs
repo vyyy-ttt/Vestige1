@@ -100,17 +100,42 @@ public class LevelManager : MonoBehaviour
 
     public void UpdateMemoryCountText()
     {
-        if(isLevelThree && levelThreeMemory != null)
+        if (isLevelThree && levelThreeMemory != null)
         {
             levelThreeMemory.UpdateMemoryCountText(memoryCount, memoryInfo);
         }
-
+        // for levels 1 and 2
+        else if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2")
+        {
+            totalMemories++;
+            memoryInfo.gameObject.SetActive(true);
+            if (hasTriedElevator)
+            {
+                memoryCount.text = "memories: " + totalMemories + "   remaining: " + (6 - totalMemories);
+            }
+            else
+            {
+                memoryCount.text = "memories: " + totalMemories;
+            }
+        }
     }
     public void UpdateMemoryText()
     {
         if (isLevelThree && levelThreeMemory != null)
         {
             levelThreeMemory.UpdateMemoryText(memoryCount);
+        }
+        // for levels 1 and 2
+        else if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2")
+        {
+            if (hasTriedElevator)
+            {
+                memoryCount.text = "memories: " + totalMemories + "   remaining: " + (6 - totalMemories);
+            }
+            else
+            {
+                memoryCount.text = "memories: " + totalMemories;
+            }
         }
     }
 }

@@ -14,9 +14,11 @@ public class StoryManager : MonoBehaviour
     int dialogueIndex;
     bool waitingForE;
 
+    public Slider healthSlider;
     public GameObject receptionistPrefab;
     public GameObject sword;
     public GameObject firstEnemyPrefab;
+    public GameObject blankMemoryPrefab;
 
     bool checkingForMovement;
     bool hasCrouched;
@@ -71,12 +73,12 @@ public class StoryManager : MonoBehaviour
             }
             else if (talkingToNPC) // get rid of this bool?
             {
+                talkingToNPC = false;
                 Debug.Log("dismiss");
                 dialogueBox.enabled = false;
                 dialogueText.enabled = false;
                 waitingForE = false;
                 PlayerController.pauseMovement = false;
-                talkingToNPC = false;
                 // some other function for random dialogue?
             }
         }
@@ -532,7 +534,30 @@ public class StoryManager : MonoBehaviour
     {
         waitingForE = true;
     }
-
+    /*
+    public void PlayerDied1()
+    {
+        talkingToNPC = true;    // has same function for dismissing message
+        waitingForE = false;
+        PlayerHealth.currentHealth = 100;
+        healthSlider.value = PlayerHealth.currentHealth;
+        LevelManager.totalMemories = 0;
+        FindObjectOfType<LevelManager>().UpdateMemoryText();
+        PlayerSwordBehavior.hasSword = false;
+        Debug.Log("rotate");
+        player.parent.transform.Rotate(90, 0, 0, Space.Self);
+        player.parent.transform.position = new Vector3(-0.636f, 2.38f, 2.49f);
+        PlayerController.pauseMovement = true;
+        PlayerAttack.disableTeleport = false;
+        FindObjectOfType<FirstEnemyScript>().ResetEnemy();
+        // need to handle the first enemy
+        // instantiate some memories
+        dialogueText.text = dialogue[0];
+        dialogueText.enabled = true;
+        dialogueBox.enabled = true;
+        Invoke("SetWaitForE", 1);
+    }
+    */
 
     private readonly string[] dialogue = { "[You ran away]",
         "\"Oh, you look new!\" [Press E to continue]",
