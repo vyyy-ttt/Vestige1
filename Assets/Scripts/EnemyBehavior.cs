@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 //using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // need to make enemy die too
 
@@ -38,6 +39,7 @@ public class EnemyBehavior : MonoBehaviour
         }
         gameObject.transform.GetChild(0).gameObject.SetActive(false); // set enemy weapon to inactive
         InvokeRepeating("SwingWeapon", 2, 2);   // also requires conditionals, but enemy will swing axe every 2 seconds when appropriate
+        cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     // Update is called once per frame
@@ -103,5 +105,9 @@ public class EnemyBehavior : MonoBehaviour
         Instantiate(lootPrefab, transform.position + Vector3.up, transform.rotation);
         Destroy(gameObject, 0.5f); 
 
+        if (SceneManager.GetActiveScene().name == "Level2a")
+        {
+            FindObjectOfType<LevelManager>().UpdateKillCountText();
+        }
     }
 }

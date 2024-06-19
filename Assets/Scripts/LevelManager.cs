@@ -13,8 +13,10 @@ public class LevelManager : MonoBehaviour
     //public AudioClip gameWonSFX;
     public string nextLevel;
     public static int totalMemories = 0;
+    public static int totalKills = 0;
     public Text memoryCount;
     public Text memoryInfo;
+    public Text killCount;
 
     private LevelThreeMemory levelThreeMemory;
     private bool isLevelThree;
@@ -32,10 +34,6 @@ public class LevelManager : MonoBehaviour
         //gameText.gameObject.SetActive(false);
         //totalMemories = 0;
         //memoryCount.text = "memories: " + totalMemories; 
-        if (isLevelThree)
-        {
-            levelThreeMemory = GetComponent<LevelThreeMemory>();
-            levelThreeMemory.InitializeMemory();
         }
     }
 
@@ -138,4 +136,3 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
-}

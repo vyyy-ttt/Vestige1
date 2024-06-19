@@ -170,6 +170,18 @@ public class PlayerAttack : MonoBehaviour
             }
     
         }
+        else if (SceneManager.GetActiveScene().name == "Level2" || SceneManager.GetActiveScene().name == "Level2a")
+        {
+            if (LevelManager.totalMemories == 3)
+            {
+                LevelManager.isGameOver = true;
+                FindObjectOfType<LevelManager>().LevelBeat();
+            }
+            else
+            {
+                LevelManager.isGameOver = false;
+            }
+        }
         else
         {
             LevelManager.isGameOver = true;

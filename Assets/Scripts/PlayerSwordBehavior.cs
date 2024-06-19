@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerSwordBehavior : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class PlayerSwordBehavior : MonoBehaviour
     {
         // start with no sword
         bool swordIsActive = false;
+        if (SceneManager.GetActiveScene().name == "Level2a")
+        {
+            swordIsActive = true;
+            hasSword = true;
+        }
         canSwing = true;
         gameObject.transform.GetChild(2).gameObject.SetActive(swordIsActive);   
     }
@@ -58,13 +64,14 @@ public class PlayerSwordBehavior : MonoBehaviour
                 if (hit.collider.CompareTag("NPC") && Input.GetKeyDown(KeyCode.E))
                 {
                     Debug.Log("dialogue 1");
-                    //hit.collider.transform.LookAt(gameObject.transform.GetChild(0).gameObject.transform);
+                    hit.collider.transform.LookAt(gameObject.transform.GetChild(0).gameObject.transform);
                     if (FindObjectOfType<LevelManager>().nextLevel == "Level2")
                     {
                         FindObjectOfType<StoryManager>().GetNPCDialogue();
                     }
-                    else if (FindObjectOfType<LevelManager>().nextLevel == "Level3")
+                    else if (FindObjectOfType<LevelManager>().nextLevel == "Level2a")
                     {
+                        Debug.Log("in level manager");
                         FindObjectOfType<StoryManager2>().GetNPCDialogue();
                     }
                 }
