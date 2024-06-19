@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class StoryManager : MonoBehaviour
 {
+    public GameObject briefPause;
     public Image dialogueBox;
     public Text dialogueText;
     public GameObject receptionistObject;
@@ -13,12 +14,13 @@ public class StoryManager : MonoBehaviour
     Vector3 recepLookPosition;
     int dialogueIndex;
     bool waitingForE;
+    public AudioClip unsheatheSFX;
 
     public Slider healthSlider;
     public GameObject receptionistPrefab;
     public GameObject sword;
     public GameObject firstEnemyPrefab;
-    public GameObject blankMemoryPrefab;
+    //public GameObject blankMemoryPrefab;
 
     bool checkingForMovement;
     bool hasCrouched;
@@ -58,6 +60,7 @@ public class StoryManager : MonoBehaviour
         miscDialogue = false;
         moveToPlayer = false;
         talkingToNPC = false;
+        briefPause.SetActive(false);
         Invoke("StartSequence", 3);
     }
 
@@ -336,6 +339,8 @@ public class StoryManager : MonoBehaviour
         }
         else if (dialogueIndex == 32)
         {
+            briefPause.SetActive(true);
+            AudioSource.PlayClipAtPoint(unsheatheSFX, GameObject.FindGameObjectWithTag("MainCamera").transform.position);
             waitingForE = true;
             dialogueBox.enabled = true;
             dialogueText.enabled = true;
@@ -344,6 +349,7 @@ public class StoryManager : MonoBehaviour
         }
         else if (dialogueIndex == 34)
         {
+            briefPause.SetActive(false);
             waitingForE = false;
             dialogueBox.enabled = false;
             dialogueText.enabled = false;
@@ -565,7 +571,7 @@ public class StoryManager : MonoBehaviour
         "\"Welcome! It's good to have you here.\"",
         "\"You probably have some questions, they all do. I’d offer you my name, but it’s still forgotten to me. Souls around here call me The Receptionist. In time, you might come up with a name you want to be called by.\"",
         "\"Here, let me show you the ropes. This can all be a shock, but it’ll make your transition easier.\"",
-        "[Follow The Receptionist with WASD.]",
+        "[Follow The Receptionist with WASD. Dismiss this message with E.]",
         "",
         "[The crosshair turned yellow. This door can be interacted with. Press E when close enough.]",
         "\"Firstly, let me tell you a bit about your new form. You can move around with WASD. Use Space Bar to jump. You can hold down Left Shift to run, and use Control to toggle crouching. Give it a try!\"",

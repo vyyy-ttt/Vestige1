@@ -942,7 +942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 100
-  cameraHeightAdjustSpeed: 2
+  cameraHeightAdjustSpeed: 5
 --- !u!1 &96049773 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6071840032707891865, guid: 6ea66b12b65e75c4ab3d74deb35a3b12, type: 3}

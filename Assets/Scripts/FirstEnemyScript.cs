@@ -28,7 +28,7 @@ public class FirstEnemyScript : MonoBehaviour
     public AudioClip enemyDeathSFX;
     public Transform cameraTransform; // for playing audio (camera.main.transform.position giving errors)
 
-    static bool enemyReset = false;
+    //static bool enemyReset = false;
     // Start is called before the first frame update
     void Start()
     {

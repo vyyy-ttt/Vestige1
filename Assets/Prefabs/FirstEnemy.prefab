@@ -767,8 +767,7 @@ MonoBehaviour:
   moveSpeed: 2
   minDistance: 1
   damageAmount: 20
-  enemySeesPlayerDistance: 5
-  ghostRanParticle: {fileID: 4896313819944489767, guid: 8b1ea687510bee5409befe5e6345f433, type: 3}
+  ghostRanParticle: {fileID: 5564470140199871232, guid: 04a871b98018c47419786a63b76a51b1, type: 3}
   lootPrefab: {fileID: 8492560867077331667, guid: 172ef5eade7cd8444ad5883bcaf77d38, type: 3}
   slashSFX: {fileID: 8300000, guid: b120fc3bee070324fa39b18fe6c83d8e, type: 3}
   enemyDeathSFX: {fileID: 8300000, guid: f5419b2bb6ad7964684104e1eefd5b8c, type: 3}
