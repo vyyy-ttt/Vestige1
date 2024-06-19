@@ -13,8 +13,10 @@ public class LevelManager : MonoBehaviour
     //public AudioClip gameWonSFX;
     public string nextLevel;
     public static int totalMemories = 0;
+    public static int totalKills = 0;
     public Text memoryCount;
     public Text memoryInfo;
+    public Text killCount;
 
     public static bool hasTriedElevator;
 
@@ -27,6 +29,10 @@ public class LevelManager : MonoBehaviour
         //gameText.gameObject.SetActive(false);
         //totalMemories = 0;
         //memoryCount.text = "memories: " + totalMemories; 
+        if (SceneManager.GetActiveScene().name == "Level2a")
+        {
+            totalMemories = 2;
+        }
     }
 
     void Update()
@@ -142,6 +148,25 @@ public class LevelManager : MonoBehaviour
         else
         {
             memoryCount.text = "memories: " + totalMemories;
+        }
+    }
+
+    public void UpdateKillCountText()
+    {
+        totalKills++;
+        killCount.text = "Kill Count: " + totalKills + "/5";
+    }
+
+    public void UpdateLevel2Memories()
+    {
+        totalMemories++;
+        if (SceneManager.GetActiveScene().name == "Level2")
+        {
+            memoryCount.text = "Memories: " + totalMemories + "/2";
+        }
+        else
+        {
+            memoryCount.text = "Memories: " + totalMemories + "/3";
         }
     }
 }

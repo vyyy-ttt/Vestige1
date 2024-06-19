@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerSwordBehavior : MonoBehaviour
 {
@@ -14,6 +15,11 @@ public class PlayerSwordBehavior : MonoBehaviour
     {
         // start with no sword
         bool swordIsActive = false;
+        if (SceneManager.GetActiveScene().name == "Level2a")
+        {
+            swordIsActive = true;
+            hasSword = true;
+        }
         canSwing = true;
         gameObject.transform.GetChild(2).gameObject.SetActive(swordIsActive);   
     }
@@ -58,7 +64,7 @@ public class PlayerSwordBehavior : MonoBehaviour
                     {
                         FindObjectOfType<StoryManager>().GetNPCDialogue();
                     }
-                    else if (FindObjectOfType<LevelManager>().nextLevel == "Level3")
+                    else if (FindObjectOfType<LevelManager>().nextLevel == "Level2a")
                     {
                         Debug.Log("in level manager");
                         FindObjectOfType<StoryManager2>().GetNPCDialogue();

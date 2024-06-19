@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MemoryPickUpBehavior : MonoBehaviour
 {
@@ -27,40 +28,46 @@ public class MemoryPickUpBehavior : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            FindObjectOfType<LevelManager>().UpdateMemoryCountText();
-            /*if(LevelManager.nextLevel == "Level4")
+            if (SceneManager.GetActiveScene().name == "Level2" || SceneManager.GetActiveScene().name == "Level2a")
             {
-                 AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
-                 Destroy(gameObject);
-            }*/
-            if (gameObject.CompareTag("Sword"))
-            {
-                 other.gameObject.transform.GetChild(2).gameObject.SetActive(true);
-                 PlayerSwordBehavior.swordIsActive = true;
-                 PlayerSwordBehavior.hasSword = true;
-                 PlayerController.pauseMovement = true;
-                 FirstEnemyScript.seenPlayer = false;
-                 FindObjectOfType<StoryManager>().NextLine();
+                FindObjectOfType<StoryManager2>().GetMemoriesDialogue();
+                FindObjectOfType<LevelManager>().UpdateLevel2Memories();
+                AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
+                Destroy(gameObject);
             }
-            //if (levelManager.nextLevel == "Level2")
-            //{
-            else 
-            { 
-                if (StoryManager.getFirstMemories)
+            else {
+                FindObjectOfType<LevelManager>().UpdateMemoryCountText();
+                /*if(LevelManager.nextLevel == "Level4")
                 {
-                    FindObjectOfType<StoryManager>().FirstMemoriesDialogue();
+                     AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
+                     Destroy(gameObject);
+                }*/
+                if (gameObject.CompareTag("Sword"))
+                {
+                    other.gameObject.transform.GetChild(2).gameObject.SetActive(true);
+                    PlayerSwordBehavior.swordIsActive = true;
+                    PlayerSwordBehavior.hasSword = true;
+                    PlayerController.pauseMovement = true;
+                    FirstEnemyScript.seenPlayer = false;
+                    FindObjectOfType<StoryManager>().NextLine();
                 }
+                //if (levelManager.nextLevel == "Level2")
+                //{
                 else
                 {
-                    FindObjectOfType<StoryManager>().LastMemoryDialogue();
+                    if (StoryManager.getFirstMemories)
+                    {
+                        FindObjectOfType<StoryManager>().FirstMemoriesDialogue();
+                    }
+                    else
+                    {
+                        FindObjectOfType<StoryManager>().LastMemoryDialogue();
+                    }
                 }
+                AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
+                Destroy(gameObject);
             }
-            AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
-            Destroy(gameObject);
         }
 
     }
-
-
-
 }
