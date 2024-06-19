@@ -6,17 +6,12 @@ public class BossHealth : MonoBehaviour
 {
     public int health = 100;
     private BossController bossController;
+    private EndGameManager endGameManager;
 
-    // Start is called before the first frame update
     void Start()
     {
         bossController = GetComponent<BossController>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        endGameManager = FindObjectOfType<EndGameManager>(); 
     }
 
     public void TakeDamage(int damage)
@@ -39,5 +34,10 @@ public class BossHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Boss died!");
+        if (endGameManager != null)
+        {
+            endGameManager.ShowEndGameMessage("You have killed your enemy, now it is time to go to the real afterlife");
+        }
+        Destroy(gameObject);
     }
 }

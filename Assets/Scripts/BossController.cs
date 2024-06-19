@@ -7,7 +7,7 @@ public class BossController : MonoBehaviour
 {
     public GameObject ghostModel;
     public GameObject humanModel;
-    public float detectRange = 10f;
+    public float detectRange = 15f; 
     public float ghostSpeed = 2f;
     public float humanSpeed = 4f;
     public int ghostDamage = 10;
@@ -46,6 +46,7 @@ public class BossController : MonoBehaviour
         if (player == null || navMeshAgent == null) return;
 
         float distance = Vector3.Distance(player.position, transform.position);
+        Debug.Log("Distance to player: " + distance);
         if (distance <= detectRange)
         {
             ChasePlayer();
@@ -68,6 +69,7 @@ public class BossController : MonoBehaviour
         {
             navMeshAgent.SetDestination(player.position);
             navMeshAgent.speed = isHuman ? humanSpeed : ghostSpeed;
+            navMeshAgent.stoppingDistance = 1f; 
         }
         else
         {
@@ -77,6 +79,7 @@ public class BossController : MonoBehaviour
 
     void AttackPlayer()
     {
+        Debug.Log("Attempting to attack player.");
         if (player == null) return;
 
         lastAttackTime = Time.time;
@@ -86,6 +89,7 @@ public class BossController : MonoBehaviour
         if (playerHealth != null)
         {
             playerHealth.PlayerTakesDamage(damage);
+            Debug.Log("Attacked player for " + damage + " damage.");
         }
         else
         {
@@ -114,6 +118,8 @@ public class BossController : MonoBehaviour
         isHuman = true;
         ghostModel.SetActive(false);
         humanModel.SetActive(true);
+        navMeshAgent.speed = humanSpeed;
+        Debug.Log("Boss changed to human stage.");
     }
 
     public void ActivateGhost()
@@ -121,5 +127,22 @@ public class BossController : MonoBehaviour
         isHuman = false;
         ghostModel.SetActive(true);
         humanModel.SetActive(false);
+        navMeshAgent.speed = ghostSpeed;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                AttackPlayer();
+            }
+            else
+            {
+                Debug.LogError("PlayerHealth component not found on player object.");
+            }
+        }
     }
 }
