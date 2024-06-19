@@ -15,6 +15,10 @@ TagManager:
   - FirstEnemy
   - Receptionist
   - Wall
+  - GameManager
+  - OptionsCanvas
+  - MainMenuCanvas
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -22,6 +26,7 @@ TagManager:
   - 
   - Water
   - UI
+  - 
   - 
   - 
   - 

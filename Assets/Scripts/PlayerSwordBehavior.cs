@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerSwordBehavior : MonoBehaviour
 {
     public AudioClip slashSFX;
+    public AudioClip unsheatheSFX;
     public Transform cameraTransform;
     public static bool swordIsActive; // whether sword is out
     public static bool hasSword = false;
@@ -32,6 +33,10 @@ public class PlayerSwordBehavior : MonoBehaviour
         {
             swordIsActive = !swordIsActive;
             gameObject.transform.GetChild(2).gameObject.SetActive(swordIsActive);
+            if (swordIsActive)
+            {
+                AudioSource.PlayClipAtPoint(unsheatheSFX, cameraTransform.position);
+            }
         }
         FixedUpdate();
         // play animation is sword out and click mouse button, play audio

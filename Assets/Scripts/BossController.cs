@@ -7,7 +7,7 @@ public class BossController : MonoBehaviour
 {
     public GameObject ghostModel;
     public GameObject humanModel;
-    public float detectRange = 10f;
+    public float detectRange = 15f;
     public float ghostSpeed = 2f;
     public float humanSpeed = 4f;
     public int ghostDamage = 10;
@@ -18,6 +18,7 @@ public class BossController : MonoBehaviour
     private Transform player;
     private NavMeshAgent navMeshAgent;
     private float lastAttackTime;
+    private bool isAttackingPlayer = false;
 
     void Start()
     {
@@ -25,7 +26,6 @@ public class BossController : MonoBehaviour
         if (playerObject != null)
         {
             player = playerObject.transform;
-            Debug.Log("Player object found: " + player.name);
         }
         else
         {
@@ -38,18 +38,6 @@ public class BossController : MonoBehaviour
             Debug.LogError("NavMeshAgent component not found on Boss object.");
         }
 
-        if (!navMeshAgent.isOnNavMesh)
-        {
-            if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 5.0f, NavMesh.AllAreas))
-            {
-                navMeshAgent.Warp(hit.position);
-            }
-            else
-            {
-                Debug.LogError("Boss cannot be repositioned to a valid NavMesh position.");
-            }
-        }
-
         lastAttackTime = -attackCooldown;
         ActivateGhost();
     }
@@ -59,13 +47,10 @@ public class BossController : MonoBehaviour
         if (player == null || navMeshAgent == null) return;
 
         float distance = Vector3.Distance(player.position, transform.position);
+        Debug.Log("Distance to player: " + distance);
         if (distance <= detectRange)
         {
             ChasePlayer();
-            if (Time.time - lastAttackTime >= attackCooldown)
-            {
-                AttackPlayer();
-            }
         }
         else
         {
@@ -81,6 +66,7 @@ public class BossController : MonoBehaviour
         {
             navMeshAgent.SetDestination(player.position);
             navMeshAgent.speed = isHuman ? humanSpeed : ghostSpeed;
+            navMeshAgent.stoppingDistance = 1f;
         }
         else
         {
@@ -88,30 +74,45 @@ public class BossController : MonoBehaviour
         }
     }
 
-    void AttackPlayer()
+    void OnTriggerEnter(Collider other)
     {
-        if (player == null || PlayerBehindWall() || navMeshAgent == null)
+        if (other.CompareTag("Player"))
         {
-            return;
+            if (!isAttackingPlayer)
+            {
+                isAttackingPlayer = true;
+                StartCoroutine(ContinuousAttack(other.GetComponent<PlayerHealth>()));
+            }
         }
+    }
 
-        lastAttackTime = Time.time;
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isAttackingPlayer = false;
+            StopAllCoroutines();
+        }
+    }
+
+    IEnumerator ContinuousAttack(PlayerHealth playerHealth)
+    {
+        while (isAttackingPlayer)
+        {
+            AttackPlayer(playerHealth);
+            yield return new WaitForSeconds(attackCooldown);
+        }
+    }
+
+    void AttackPlayer(PlayerHealth playerHealth)
+    {
+        Debug.Log("Attempting to attack player.");
+        if (playerHealth == null) return;
+
         int damage = isHuman ? humanDamage : ghostDamage;
 
-        if (player != null)
-        {
-            Debug.Log("Attempting to get PlayerHealth component on: " + player.name);
-            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
-            {
-                Debug.Log("PlayerHealth component found. Applying damage.");
-                playerHealth.PlayerTakesDamage(damage); 
-            }
-            else
-            {
-                Debug.LogError("PlayerHealth component not found on player object.");
-            }
-        }
+        playerHealth.PlayerTakesDamage(damage);
+        Debug.Log("Attacked player for " + damage + " damage.");
     }
 
     bool PlayerBehindWall()
@@ -135,6 +136,8 @@ public class BossController : MonoBehaviour
         isHuman = true;
         ghostModel.SetActive(false);
         humanModel.SetActive(true);
+        navMeshAgent.speed = humanSpeed;
+        Debug.Log("Boss changed to human stage.");
     }
 
     public void ActivateGhost()
@@ -142,5 +145,6 @@ public class BossController : MonoBehaviour
         isHuman = false;
         ghostModel.SetActive(true);
         humanModel.SetActive(false);
+        navMeshAgent.speed = ghostSpeed;
     }
 }
