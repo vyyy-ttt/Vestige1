@@ -7,7 +7,7 @@ public class BossController : MonoBehaviour
 {
     public GameObject ghostModel;
     public GameObject humanModel;
-    public float detectRange = 15f; 
+    public float detectRange = 15f;
     public float ghostSpeed = 2f;
     public float humanSpeed = 4f;
     public int ghostDamage = 10;
@@ -18,6 +18,7 @@ public class BossController : MonoBehaviour
     private Transform player;
     private NavMeshAgent navMeshAgent;
     private float lastAttackTime;
+    private bool isAttackingPlayer = false;
 
     void Start()
     {
@@ -50,10 +51,6 @@ public class BossController : MonoBehaviour
         if (distance <= detectRange)
         {
             ChasePlayer();
-            if (distance <= navMeshAgent.stoppingDistance && Time.time - lastAttackTime >= attackCooldown && !PlayerBehindWall())
-            {
-                AttackPlayer();
-            }
         }
         else
         {
@@ -69,7 +66,7 @@ public class BossController : MonoBehaviour
         {
             navMeshAgent.SetDestination(player.position);
             navMeshAgent.speed = isHuman ? humanSpeed : ghostSpeed;
-            navMeshAgent.stoppingDistance = 1f; 
+            navMeshAgent.stoppingDistance = 1f;
         }
         else
         {
@@ -77,24 +74,45 @@ public class BossController : MonoBehaviour
         }
     }
 
-    void AttackPlayer()
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (!isAttackingPlayer)
+            {
+                isAttackingPlayer = true;
+                StartCoroutine(ContinuousAttack(other.GetComponent<PlayerHealth>()));
+            }
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isAttackingPlayer = false;
+            StopAllCoroutines();
+        }
+    }
+
+    IEnumerator ContinuousAttack(PlayerHealth playerHealth)
+    {
+        while (isAttackingPlayer)
+        {
+            AttackPlayer(playerHealth);
+            yield return new WaitForSeconds(attackCooldown);
+        }
+    }
+
+    void AttackPlayer(PlayerHealth playerHealth)
     {
         Debug.Log("Attempting to attack player.");
-        if (player == null) return;
+        if (playerHealth == null) return;
 
-        lastAttackTime = Time.time;
         int damage = isHuman ? humanDamage : ghostDamage;
 
-        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-        if (playerHealth != null)
-        {
-            playerHealth.PlayerTakesDamage(damage);
-            Debug.Log("Attacked player for " + damage + " damage.");
-        }
-        else
-        {
-            Debug.LogError("PlayerHealth component not found on player object.");
-        }
+        playerHealth.PlayerTakesDamage(damage);
+        Debug.Log("Attacked player for " + damage + " damage.");
     }
 
     bool PlayerBehindWall()
@@ -128,21 +146,5 @@ public class BossController : MonoBehaviour
         ghostModel.SetActive(true);
         humanModel.SetActive(false);
         navMeshAgent.speed = ghostSpeed;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
-            {
-                AttackPlayer();
-            }
-            else
-            {
-                Debug.LogError("PlayerHealth component not found on player object.");
-            }
-        }
     }
 }

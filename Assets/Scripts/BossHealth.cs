@@ -22,7 +22,7 @@ public class BossHealth : MonoBehaviour
             if (!bossController.isHuman)
             {
                 bossController.ChangeToHuman();
-                health = 150; 
+                health = 150;
             }
             else
             {

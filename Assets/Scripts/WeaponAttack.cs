@@ -7,16 +7,17 @@ public class WeaponAttack : MonoBehaviour
     public int attackDamage = 20;
     public AudioClip attackSFX;
     public Transform cameraTransform;
-    public float attackRange = 2f; // Range within which the player can attack the boss
+    public float attackRange = 2f; 
 
     private Transform playerTransform;
     private Transform bossTransform;
     private bool canAttack = false;
+    private int searchAttempts = 0;
+    private const int maxSearchAttempts = 2;
 
-    // Start is called before the first frame update
     void Start()
     {
-        playerTransform = transform.root; // Assuming the weapon is a child of the player
+        playerTransform = transform.root;
 
         if (cameraTransform == null)
         {
@@ -24,13 +25,15 @@ public class WeaponAttack : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        CheckBossProximity();
-        if (canAttack && Input.GetKeyDown(KeyCode.B))
+        if (searchAttempts < maxSearchAttempts)
         {
-            Attack();
+            CheckBossProximity();
+            if (canAttack && Input.GetKeyDown(KeyCode.B))
+            {
+                Attack();
+            }
         }
     }
 
@@ -43,10 +46,13 @@ public class WeaponAttack : MonoBehaviour
             float distanceToBoss = Vector3.Distance(playerTransform.position, bossTransform.position);
             Debug.Log("Distance to boss: " + distanceToBoss);
             canAttack = distanceToBoss <= attackRange;
+
+            PrintHierarchy(bossObject.transform);
         }
         else
         {
             Debug.LogError("Boss not found.");
+            searchAttempts++;
         }
     }
 

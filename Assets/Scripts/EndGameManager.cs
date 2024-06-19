@@ -17,5 +17,12 @@ public class EndGameManager : MonoBehaviour
     {
         endGameText.text = message;
         endGameText.gameObject.SetActive(true);
+        StartCoroutine(PauseGame());
+    }
+
+    IEnumerator PauseGame()
+    {
+        yield return new WaitForSeconds(1f);
+        Time.timeScale = 0; 
     }
 }
