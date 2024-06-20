@@ -110,8 +110,8 @@ public class PlayerAttack : MonoBehaviour
             // immediate kill if crouching when attacking
             if(MouseLook.isCrouching && hit.collider.CompareTag("Enemy") && PlayerSwordBehavior.swordIsActive && Input.GetButtonDown("Fire1") && ghostAI.currentState == GhostEnemyAI.FSMStates.Patrol) // and in patrol mode
             {
-                Debug.Log("enemy died hopefully");
-                FindObjectOfType<EnemyBehavior>().EnemyTakesDamage(100);
+                hit.transform.gameObject.GetComponent<EnemyBehavior>().EnemyTakesDamage(100);
+                Debug.Log("enemy was hit");
             }
             // if enemy within 2 units and player has sword out and hits mouse, enemy takes damage
             
@@ -124,7 +124,8 @@ public class PlayerAttack : MonoBehaviour
                 }
                 else
                 {
-                    FindObjectOfType<EnemyBehavior>().EnemyTakesDamage(weaponDamage);
+                    hit.transform.gameObject.GetComponent<EnemyBehavior>().EnemyTakesDamage(20);
+                    Debug.Log("enemy was hit");
                 }
             }
             else if (hit.collider.CompareTag("FirstEnemy") && PlayerSwordBehavior.swordIsActive && Input.GetButtonDown("Fire1"))
