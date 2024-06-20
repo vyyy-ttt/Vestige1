@@ -320,7 +320,7 @@ public class StoryManager : MonoBehaviour
             dialogueIndex++;
             PlayerAttack.disableTeleport = true;
             //MoveReceptionistNextRoom();
-            Invoke("WaitForEnemy", 9);
+            Invoke("WaitForEnemy", 6);
         }
         else if (dialogueIndex == 30)
         {

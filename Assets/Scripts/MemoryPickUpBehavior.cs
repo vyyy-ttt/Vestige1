@@ -42,48 +42,32 @@ public class MemoryPickUpBehavior : MonoBehaviour
             // comment out if issue \/\/
             else if(isLevelThree)
             {
-                 AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
-                 Destroy(gameObject);
+                AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
+                Destroy(gameObject);
             }
 
             else if (gameObject.CompareTag("Sword"))
             {
-                 other.gameObject.transform.GetChild(2).gameObject.SetActive(true);
-                 PlayerSwordBehavior.swordIsActive = true;
-                 PlayerSwordBehavior.hasSword = true;
-                 PlayerController.pauseMovement = true;
-                 FirstEnemyScript.seenPlayer = false;
-                 FindObjectOfType<StoryManager>().NextLine();
+                FindObjectOfType<LevelManager>().UpdateMemoryCountText();
+                other.gameObject.transform.GetChild(2).gameObject.SetActive(true);
+                PlayerSwordBehavior.swordIsActive = true;
+                PlayerSwordBehavior.hasSword = true;
+                PlayerController.pauseMovement = true;
+                FirstEnemyScript.seenPlayer = false;
+                FindObjectOfType<StoryManager>().NextLine();
+                Destroy(gameObject);
             }
 
-            else {
+            else 
+            {
                 FindObjectOfType<LevelManager>().UpdateMemoryCountText();
-                /*if(LevelManager.nextLevel == "Level4")
+                if (StoryManager.getFirstMemories)
                 {
-                     AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
-                     Destroy(gameObject);
-                }*/
-                if (gameObject.CompareTag("Sword"))
-                {
-                    other.gameObject.transform.GetChild(2).gameObject.SetActive(true);
-                    PlayerSwordBehavior.swordIsActive = true;
-                    PlayerSwordBehavior.hasSword = true;
-                    PlayerController.pauseMovement = true;
-                    FirstEnemyScript.seenPlayer = false;
-                    FindObjectOfType<StoryManager>().NextLine();
+                    FindObjectOfType<StoryManager>().FirstMemoriesDialogue();
                 }
-                //if (levelManager.nextLevel == "Level2")
-                //{
                 else
                 {
-                    if (StoryManager.getFirstMemories)
-                    {
-                        FindObjectOfType<StoryManager>().FirstMemoriesDialogue();
-                    }
-                    else
-                    {
-                        FindObjectOfType<StoryManager>().LastMemoryDialogue();
-                    }
+                    FindObjectOfType<StoryManager>().LastMemoryDialogue();
                 }
                 AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
                 Destroy(gameObject);
