@@ -35,7 +35,7 @@ public class EnemyBehavior : MonoBehaviour
         healthAmount = 100;
         if (playerMoveToward == null)
         {
-            playerMoveToward = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).gameObject.transform;
+            playerMoveToward = GameObject.FindGameObjectWithTag("MoveToward").transform;
         }
         gameObject.transform.GetChild(0).gameObject.SetActive(false); // set enemy weapon to inactive
         InvokeRepeating("SwingWeapon", 2, 2);   // also requires conditionals, but enemy will swing axe every 2 seconds when appropriate
