@@ -1556,7 +1556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5573569847918183173, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5943281822021965039, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
       propertyPath: slashSFX
@@ -1566,6 +1566,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5943281822021965039, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 1376665650}
     - target: {fileID: 5943281822021965039, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
       propertyPath: playerMoveToward
       value: 
@@ -3451,7 +3455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5573569847918183173, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5943281822021965039, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
       propertyPath: slashSFX
@@ -3461,6 +3465,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5943281822021965039, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 1376665650}
     - target: {fileID: 5943281822021965039, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
       propertyPath: playerMoveToward
       value: 
@@ -3825,15 +3833,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6852337599751431614, guid: 3a9b52e4bb795104dbcfa310cb9e90e2, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 40
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6852337599751431614, guid: 3a9b52e4bb795104dbcfa310cb9e90e2, type: 3}
       propertyPath: m_FontData.m_Alignment
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6852337599751431614, guid: 3a9b52e4bb795104dbcfa310cb9e90e2, type: 3}
       propertyPath: m_FontData.m_VerticalOverflow
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7356642238209308683, guid: 3a9b52e4bb795104dbcfa310cb9e90e2, type: 3}
       propertyPath: m_Pivot.x
@@ -4157,7 +4165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5573569847918183173, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5943281822021965039, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
       propertyPath: slashSFX
@@ -4167,6 +4175,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5943281822021965039, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 1376665650}
     - target: {fileID: 5943281822021965039, guid: 56a7be23d16ecee4896f8fc06e78ed4c, type: 3}
       propertyPath: playerMoveToward
       value: 
