@@ -19,14 +19,18 @@ public class GhostEnemyAI : MonoBehaviour
     public float chaseDistance = 10;
     public float enemySpeed;
     public GameObject player;
+    public Transform enemyEyes;
+    public float fieldOfView = 45f;
     GameObject[] wanderPoints;
     Vector3 nextDestination;
     float distanceToPlayer;
     float elapsedTime = 0;
+    UnityEngine.AI.NavMeshAgent agent;
 
     int currentDestinationIndex = 0;
     void Start()
     {
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         wanderPoints = GameObject.FindGameObjectsWithTag("WanderPoint");
         player = GameObject.FindGameObjectWithTag("Player");
        currentState = FSMStates.Patrol;
@@ -64,25 +68,30 @@ public class GhostEnemyAI : MonoBehaviour
         //print("Patrolling!");
         //Debug.Log(distanceToPlayer);
 
+        agent.stoppingDistance = 0;
+        agent.speed = 5f;
+
         if(Vector3.Distance(transform.position, nextDestination) < 1)
         {
             FindNextPoint();
         }
-        else if(distanceToPlayer <= chaseDistance)
+        else if(distanceToPlayer <= chaseDistance && IsPlayerInClearFOV())
         {
             currentState = FSMStates.Chase;
         }
 
         FaceTarget(nextDestination);
 
-        transform.position = Vector3.MoveTowards(transform.position, nextDestination, enemySpeed * Time.deltaTime);
-
+        //transform.position = Vector3.MoveTowards(transform.position, nextDestination, enemySpeed * Time.deltaTime);
+        agent.SetDestination(nextDestination);
 
     }
     void UpdateChaseState()
     {
 
         nextDestination = player.transform.position;
+        agent.stoppingDistance = attackDistance;
+        agent.speed = 7;
 
         // if(distanceToPlayer <= attackDistance) // disable to switch to attack for now
         // {
@@ -90,12 +99,14 @@ public class GhostEnemyAI : MonoBehaviour
         // }
         if(distanceToPlayer > chaseDistance)
         {
+            FindNextPoint();
             currentState = FSMStates.Patrol;
         }
 
         FaceTarget(nextDestination);
 
-        transform.position = Vector3.MoveTowards(transform.position, nextDestination, enemySpeed * Time.deltaTime);
+        //transform.position = Vector3.MoveTowards(transform.position, nextDestination, enemySpeed * Time.deltaTime);
+        agent.SetDestination(nextDestination);
     }
     void UpdateAttackState()
     {
@@ -130,6 +141,7 @@ public class GhostEnemyAI : MonoBehaviour
         nextDestination = wanderPoints[currentDestinationIndex].transform.position;
 
         currentDestinationIndex = (currentDestinationIndex + 1) % wanderPoints.Length;
+        agent.SetDestination(nextDestination);
     }
 
     void FaceTarget(Vector3 target)
@@ -149,6 +161,34 @@ public class GhostEnemyAI : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, chaseDistance);
 
+        Vector3 frontRayPoint = enemyEyes.position + (enemyEyes.forward * chaseDistance);
+        Vector3 leftRayPoint = Quaternion.Euler(0, fieldOfView * 0.5f, 0) * frontRayPoint;
+        Vector3 rightRayPoint = Quaternion.Euler(0, -fieldOfView * 0.5f, 0) * frontRayPoint;
 
+        Debug.DrawLine(enemyEyes.position, frontRayPoint, Color.cyan);
+        Debug.DrawLine(enemyEyes.position, leftRayPoint, Color.yellow);
+        Debug.DrawLine(enemyEyes.position, rightRayPoint, Color.yellow);
+
+    }
+
+    bool IsPlayerInClearFOV()
+    {
+        RaycastHit hit;
+        Vector3 directionToPlayer = player.transform.position - enemyEyes.position;
+
+        if(Vector3.Angle(directionToPlayer, enemyEyes.forward) <= fieldOfView)
+        {
+            if(Physics.Raycast(enemyEyes.position, directionToPlayer, out hit, chaseDistance))
+            {
+                if(hit.collider.CompareTag("Player"))
+                {
+                    print("Player in sight!");
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+        return false;
     }
 }

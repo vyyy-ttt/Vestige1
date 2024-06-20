@@ -88,6 +88,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         // would be cool if ghost turned more transparent as health went down
         healthAmount -= amount;
+        Debug.Log(healthAmount);
         if (healthAmount < 0)
         {
             EnemyDies();
