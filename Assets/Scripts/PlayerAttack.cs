@@ -114,6 +114,7 @@ public class PlayerAttack : MonoBehaviour
                 FindObjectOfType<EnemyBehavior>().EnemyTakesDamage(100);
             }
             // if enemy within 2 units and player has sword out and hits mouse, enemy takes damage
+            
             if (hit.collider.CompareTag("Enemy") && PlayerSwordBehavior.swordIsActive && Input.GetButtonDown("Fire1"))
             {
                 Debug.Log("enemy took damage");

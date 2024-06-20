@@ -5546,6 +5546,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -2.1493
       objectReference: {fileID: 0}
+    - target: {fileID: 4403910046070808037, guid: 6208aeac0e530407481567f6549b4065, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4635798175415539980, guid: 6208aeac0e530407481567f6549b4065, type: 3}
       propertyPath: jumpSFX
       value: 
