@@ -149,7 +149,7 @@ public class LevelManager : MonoBehaviour
     public void UpdateKillCountText()
     {
         totalKills++;
-        killCount.text = "Kill Count: " + totalKills + "/5";
+        killCount.text = "Kill Count: " + totalKills + "/4";
     }
 
     public void UpdateLevel2Memories()
