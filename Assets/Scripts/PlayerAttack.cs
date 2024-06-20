@@ -23,6 +23,8 @@ public class PlayerAttack : MonoBehaviour
     static bool doorMessage2;   // maybe not static
     static bool doorMessage3;
 
+    public static int level4ElevatorEnding = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -158,8 +160,15 @@ public class PlayerAttack : MonoBehaviour
         
         if (SceneManager.GetActiveScene().name == "Level4")
         {
-
-            gameText.gameObject.SetActive(true);
+            if (level4ElevatorEnding == 1)
+            {
+                Debug.Log("bad ending selected");
+                SceneManager.LoadScene("BadEnding");
+            }
+            else if (level4ElevatorEnding == 2)
+            {
+                FindObjectOfType<StoryManager4>().GoodEnding();
+            }
         }
         else if (SceneManager.GetActiveScene().name == "Level1")
         {

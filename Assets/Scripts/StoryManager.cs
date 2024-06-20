@@ -48,6 +48,7 @@ public class StoryManager : MonoBehaviour
         recepFacePlayer = false;
         waitingForE = false;
         dialogueBox.enabled = false;
+        dialogueText.enabled = true;
         PlayerController.pauseMovement = true;
         dialogueIndex = 1;
         checkingForMovement = false;

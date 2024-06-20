@@ -58,6 +58,12 @@ public class MemoryPickUpBehavior : MonoBehaviour
                 FindObjectOfType<StoryManager>().NextLine();
                 Destroy(gameObject);
             }
+            else if (SceneManager.GetActiveScene().name == "Level4")
+            {
+                AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
+                FindObjectOfType<StoryManager4>().MemoryDialogue();
+                Destroy(gameObject);
+            }
 
             else 
             {
