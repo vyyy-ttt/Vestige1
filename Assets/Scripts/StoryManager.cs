@@ -13,7 +13,7 @@ public class StoryManager : MonoBehaviour
     public Transform player;
     Vector3 recepLookPosition;
     int dialogueIndex;
-    bool waitingForE;
+    public static bool waitingForE;
     public AudioClip unsheatheSFX;
 
     public Slider healthSlider;
@@ -77,11 +77,11 @@ public class StoryManager : MonoBehaviour
             }
             else if (talkingToNPC) // get rid of this bool?
             {
+                waitingForE = false;
                 talkingToNPC = false;
                 Debug.Log("dismiss");
                 dialogueBox.enabled = false;
                 dialogueText.enabled = false;
-                waitingForE = false;
                 PlayerController.pauseMovement = false;
                 // some other function for random dialogue?
             }
@@ -523,7 +523,7 @@ public class StoryManager : MonoBehaviour
         dialogueBox.enabled = true;
         dialogueText.enabled = true;
         talkingToNPC = true;
-        Invoke("SetWaitForE", 1);
+        Invoke("SetWaitForE", .5f);
     }
 
     public void ElevatorDialogue()
@@ -534,7 +534,7 @@ public class StoryManager : MonoBehaviour
         dialogueBox.enabled = true;
         dialogueText.enabled = true;
         talkingToNPC = true;
-        Invoke("SetWaitForE", 1);
+        Invoke("SetWaitForE", .5f);
     }
 
     void SetWaitForE()

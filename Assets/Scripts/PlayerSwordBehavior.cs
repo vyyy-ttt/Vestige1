@@ -69,7 +69,7 @@ public class PlayerSwordBehavior : MonoBehaviour
                 {
                     Debug.Log("dialogue 1");
                     hit.collider.transform.LookAt(gameObject.transform.GetChild(0).gameObject.transform);
-                    if (FindObjectOfType<LevelManager>().nextLevel == "Level2")
+                    if (FindObjectOfType<LevelManager>().nextLevel == "Level2" && !StoryManager.waitingForE)
                     {
                         FindObjectOfType<StoryManager>().GetNPCDialogue();
                     }

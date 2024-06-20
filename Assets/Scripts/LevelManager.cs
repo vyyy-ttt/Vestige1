@@ -47,6 +47,7 @@ public class LevelManager : MonoBehaviour
         {
             levelThreeMemory = GetComponent<LevelThreeMemory>();
             levelThreeMemory.InitializeMemory();
+            totalKills = 0;
         }
     }
 
