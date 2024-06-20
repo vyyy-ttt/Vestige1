@@ -28,8 +28,6 @@ public class StoryManager4 : MonoBehaviour
     public Canvas normalUI;
     int creditLineCount;
 
-    static int levelThreeKills = 2; // should be from level 3
-
     // Start is called before the first frame update
     void Start()
     {
@@ -138,7 +136,7 @@ public class StoryManager4 : MonoBehaviour
             dialogueIndex++;
             dialogueBox.enabled = true; // consider putting this at end of 2
             dialogueText.enabled = true;
-            if (levelThreeKills < 3)
+            if (LevelManager.totalKills < 3)
             {
                 dialogueIndex++;
             }
@@ -181,7 +179,7 @@ public class StoryManager4 : MonoBehaviour
     public void MemoryDialogue()
     {
         Time.timeScale = 0f;
-        if (levelThreeKills > 2)
+        if (LevelManager.totalKills > 2)
         {
             dialogueText.text = "[You pick up half of a photograph. It matches the other half you picked up earlier. Beside yourself, you're shaking hands with men in suits, grim-faced.]";
         }
