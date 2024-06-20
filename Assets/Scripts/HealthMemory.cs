@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class HealthMemory : MonoBehaviour
 {
-
     public int healthAmount = 10;
     public AudioClip pickupSFX;
     public Transform cameraTransform;
+    public float rotationAmount = 45f; 
 
-    // Start is called before the first frame update
     void Start()
     {
         if (cameraTransform == null)
@@ -18,10 +17,10 @@ public class HealthMemory : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.Rotate(Vector3.forward, 360 * Time.deltaTime);
+        // Rotate the memory
+        transform.Rotate(Vector3.up * rotationAmount * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)

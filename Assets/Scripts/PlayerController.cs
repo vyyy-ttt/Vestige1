@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpSFX;
 
     private bool isInSafeZone = false;
-    public float healRate = 10f;
     public float health = 100f;
     public float maxHealth = 100f;
 
@@ -25,7 +24,6 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!pauseMovement)
@@ -38,10 +36,10 @@ public class PlayerController : MonoBehaviour
                 isCrouching = !isCrouching;
             }
 
-            // crouch speed is halved
+            // crouch speed is set to 5
             if (isCrouching)
             {
-                currentSpeed /= 2;
+                currentSpeed = 5f;
             }
 
             // run speed is doubled
@@ -66,7 +64,7 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetButton("Jump"))
                 {
                     moveDirection.y = Mathf.Sqrt(2 * jumpHeight * gravity);
-                    AudioSource.PlayClipAtPoint(jumpSFX, GameObject.FindGameObjectWithTag("MainCamera").transform.position);
+                    AudioSource.PlayClipAtPoint(jumpSFX, Camera.main.transform.position);
                 }
                 else
                 {
@@ -74,7 +72,7 @@ public class PlayerController : MonoBehaviour
                 }
 
             }
-            // can move middair
+            // can move mid-air
             else
             {
                 input.y = moveDirection.y;
@@ -88,11 +86,6 @@ public class PlayerController : MonoBehaviour
 
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
-
-        if (isInSafeZone)
-        {
-            HealPlayer();
-        }
     }
 
     public void EnterSafeZone()
@@ -107,10 +100,8 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player has exited the safe zone.");
     }
 
-    private void HealPlayer()
+    public bool IsInSafeZone()
     {
-        health = Mathf.Min(maxHealth, health + healRate * Time.deltaTime);
-        Debug.Log("Player is healing in the safe zone. Current health: " + health);
+        return isInSafeZone;
     }
-
 }
