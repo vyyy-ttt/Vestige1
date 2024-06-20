@@ -29,7 +29,10 @@ public class LevelManager : MonoBehaviour
         totalMemories = 0;
         hasTriedElevator = false;
         isLevelThree = SceneManager.GetActiveScene().name == "Level3";
-        memoryInfo.gameObject.SetActive(false);
+        if (isLevelThree)
+        {
+            memoryInfo.gameObject.SetActive(false);
+        }
 
         //gameText.gameObject.SetActive(false);
         //totalMemories = 0;

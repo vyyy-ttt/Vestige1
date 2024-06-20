@@ -38,6 +38,7 @@ public class BossHealth : MonoBehaviour
         {
             endGameManager.ShowEndGameMessage("You have killed your enemy, now it is time to go to the real afterlife");
         }
+        FindObjectOfType<StoryManager4>().NextLine();
         Destroy(gameObject);
     }
 }
