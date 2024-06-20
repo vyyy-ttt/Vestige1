@@ -202,6 +202,7 @@ public class StoryManager4 : MonoBehaviour
         dialogueBox.enabled = false;
         dialogueText.enabled = false;
         normalUI.enabled = false;
+        fadeToWhite.SetActive(true);
         fadeToWhite.GetComponent<Animator>().SetTrigger("FadeToWhite");
         Invoke("PlayCreditLine", 5);
     }
