@@ -2298,6 +2298,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerWithSword
       objectReference: {fileID: 0}
+    - target: {fileID: 2056629662768125081, guid: 0975a0101336029429c307c8afefaefb, type: 3}
+      propertyPath: m_TagString
+      value: MoveToward
+      objectReference: {fileID: 0}
     - target: {fileID: 2388085557449804653, guid: 0975a0101336029429c307c8afefaefb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.636
@@ -4867,7 +4871,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &855758811
 Transform:
   m_ObjectHideFlags: 0

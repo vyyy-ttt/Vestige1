@@ -620,10 +620,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 498253721416304299, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1120708127}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 498253721416304272, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1608999138}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
 --- !u!4 &82080749 stripped
 Transform:
@@ -3381,9 +3378,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 498253721416304272, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 937587930}
-    - targetCorrespondingSourceObject: {fileID: 498253721416304272, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 937587934}
   m_SourcePrefab: {fileID: 100100000, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
 --- !u!4 &612704443 stripped
@@ -5158,24 +5152,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 498253721416304272, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
   m_PrefabInstance: {fileID: 612704442}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &937587930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 937587926}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 065cf0928b7ab5d4cab97608e9777153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  dialogueBox: {fileID: 1363286973}
-  dialogueText: {fileID: 1198821406}
-  lines:
-  - I wonder what this room looks like to you. You know rooms here are different
-    for everyone. I see a big train station. I wonder if I traveled a lot?
 --- !u!136 &937587934
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6536,10 +6512,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 498253721416304299, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
       insertIndex: -1
       addedObject: {fileID: 842236166}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 498253721416304272, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1635130823}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
 --- !u!4 &1220610601 stripped
 Transform:
@@ -8397,30 +8370,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8023931417504410445, guid: 86db45bbad9874e4e981a336dd6f32c7, type: 3}
   m_PrefabInstance: {fileID: 1587299125}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1608999134 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 498253721416304272, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
-  m_PrefabInstance: {fileID: 82080748}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1608999138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1608999134}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 065cf0928b7ab5d4cab97608e9777153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  dialogueBox: {fileID: 1363286973}
-  dialogueText: {fileID: 1198821406}
-  lines:
-  - I don't know why some souls come here first instead of straight to the afterlife.
-    Probably has something to do with what we did when we were alive. But I hardly
-    remember.
 --- !u!1 &1617834357
 GameObject:
   m_ObjectHideFlags: 0
@@ -8686,30 +8635,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9092133703982473558, guid: 64de09c561d8a8546aef8d749df4c0ce, type: 3}
   m_PrefabInstance: {fileID: 1632969869}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1635130819 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 498253721416304272, guid: f6ab88624626d1249bd73bcb4a1c7d59, type: 3}
-  m_PrefabInstance: {fileID: 1220610600}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1635130823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635130819}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 065cf0928b7ab5d4cab97608e9777153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  dialogueBox: {fileID: 1363286973}
-  dialogueText: {fileID: 1198821406}
-  lines:
-  - Time is weird here. Some souls show up soon after dying, some show up much later.
-    No idea why. My sister and I died at the same time, but she got here later than
-    me. Now she's already in the afterlife.
 --- !u!1 &1641657670
 GameObject:
   m_ObjectHideFlags: 0
