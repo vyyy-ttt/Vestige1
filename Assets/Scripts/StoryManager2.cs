@@ -74,7 +74,7 @@ public class StoryManager2 : MonoBehaviour
         //NPCsCountText.text = "NPCs Talked To: " + npcInteractionCount + "/3";
         //memoriesCountText.text = "Memories: " + memoriesCount + "/3";
 
-        if (LevelManager.totalKills == 5)
+        if (LevelManager.totalKills == 4)
         {
             stageMemory.SetActive(true);
         }

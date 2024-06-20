@@ -115,7 +115,14 @@ public class PlayerAttack : MonoBehaviour
             if (hit.collider.CompareTag("Enemy") && PlayerSwordBehavior.swordIsActive && Input.GetButtonDown("Fire1"))
             {
                 Debug.Log("enemy took damage");
-                FindObjectOfType<EnemyBehavior>().EnemyTakesDamage(weaponDamage);
+                if (SceneManager.GetActiveScene().name == "Level2a")
+                {
+                    FindObjectOfType<Level2EnemyBehavior>().EnemyTakesDamage(weaponDamage);
+                }
+                else
+                {
+                    FindObjectOfType<EnemyBehavior>().EnemyTakesDamage(weaponDamage);
+                }
             }
             else if (hit.collider.CompareTag("FirstEnemy") && PlayerSwordBehavior.swordIsActive && Input.GetButtonDown("Fire1"))
             {
