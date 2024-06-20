@@ -15,6 +15,10 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Level3" || SceneManager.GetActiveScene().name == "Level4")
+        {
+            startingHealth = 120;
+        }
         currentHealth = startingHealth;
         healthSlider.value = currentHealth;
     }
