@@ -19,6 +19,7 @@ TagManager:
   - OptionsCanvas
   - MainMenuCanvas
   - Boss
+  - Spawner
   layers:
   - Default
   - TransparentFX
