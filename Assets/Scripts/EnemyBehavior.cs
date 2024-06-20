@@ -106,7 +106,7 @@ public class EnemyBehavior : MonoBehaviour
         Instantiate(lootPrefab, transform.position + Vector3.up, transform.rotation);
         Destroy(gameObject, 0.5f); 
 
-        if (SceneManager.GetActiveScene().name == "Level2a")
+        if (SceneManager.GetActiveScene().name == "Level2a" || SceneManager.GetActiveScene().name == "Level3" )
         {
             FindObjectOfType<LevelManager>().UpdateKillCountText();
         }
