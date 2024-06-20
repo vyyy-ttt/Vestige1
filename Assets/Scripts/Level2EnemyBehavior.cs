@@ -45,6 +45,27 @@ public class Level2EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isDead)
+        {
+            if ((transform.position - playerMoveToward.position).magnitude > enemySeesPlayerDistance)
+            {
+                seenPlayer = false;
+                gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            }
+
+            if ((transform.position - playerMoveToward.position).magnitude < enemySeesPlayerDistance)
+            {
+                seenPlayer = true;
+            }
+            
+            if (seenPlayer)
+            {
+                PlayerAttack.disableTeleport = false;
+                transform.LookAt(playerMoveToward);
+            }
+        }
+        
+        /*
         // if enemy sees player, look at player
         
         if (!isDead && seenPlayer)
@@ -53,13 +74,14 @@ public class Level2EnemyBehavior : MonoBehaviour
             transform.LookAt(playerMoveToward);
             var step = moveSpeed * Time.deltaTime;
             var distance = (transform.position - playerMoveToward.position).magnitude;
-
+            /*
             // move to player if enough distance between
             if (distance > minDistance)
             {
                 transform.position = Vector3.MoveTowards(transform.position,
                     new Vector3(playerMoveToward.position.x, transform.position.y, playerMoveToward.position.z), step);
             }
+            
         }
         // if enemy is alive but hasn't seen player, look at player and draw weapon when 5 units close
         else if (!isDead)
@@ -71,7 +93,7 @@ public class Level2EnemyBehavior : MonoBehaviour
                 // should play a sound effect
             }
         }
-        
+        */
     }
 
     // if enemy sees player, is alive, and close enough, swing weapon (has collider) and play sound
