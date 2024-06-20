@@ -47,6 +47,7 @@ public class LevelManager : MonoBehaviour
         {
             levelThreeMemory = GetComponent<LevelThreeMemory>();
             levelThreeMemory.InitializeMemory();
+            totalKills = 0;
         }
     }
 
@@ -200,6 +201,10 @@ public class LevelManager : MonoBehaviour
     {
         totalKills++;
         killCount.text = "Kill Count: " + totalKills + "/4";
+        if (SceneManager.GetActiveScene().name == "Level3")
+        {
+            killCount.text = "Kill Count: " + totalKills + "/3";
+        }
     }
 
     public void UpdateLevel2Memories()
