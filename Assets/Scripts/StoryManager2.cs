@@ -66,6 +66,7 @@ public class StoryManager2 : MonoBehaviour
 
                 if (LevelManager.totalMemories == 2)
                 {
+                    Debug.Log("in transition level conditional");
                     TransitionLevel();
                 }
             }

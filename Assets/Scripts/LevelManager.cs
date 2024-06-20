@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -34,6 +33,16 @@ public class LevelManager : MonoBehaviour
         //gameText.gameObject.SetActive(false);
         //totalMemories = 0;
         //memoryCount.text = "memories: " + totalMemories; 
+
+        if (SceneManager.GetActiveScene().name == "Level2a")
+        {
+            totalMemories = 2;
+        }
+
+        if (isLevelThree)
+        {
+            levelThreeMemory = GetComponent<LevelThreeMemory>();
+            levelThreeMemory.InitializeMemory();
         }
     }
 
@@ -124,7 +133,7 @@ public class LevelManager : MonoBehaviour
             levelThreeMemory.UpdateMemoryText(memoryCount);
         }
         // for levels 1 and 2
-        else if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2")
+        else if (SceneManager.GetActiveScene().name == "Level1")
         {
             if (hasTriedElevator)
             {
@@ -136,3 +145,23 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
+
+    public void UpdateKillCountText()
+    {
+        totalKills++;
+        killCount.text = "Kill Count: " + totalKills + "/5";
+    }
+
+    public void UpdateLevel2Memories()
+    {
+        totalMemories++;
+        if (SceneManager.GetActiveScene().name == "Level2")
+        {
+            memoryCount.text = "Memories: " + totalMemories + "/2";
+        }
+        else
+        {
+            memoryCount.text = "Memories: " + totalMemories + "/3";
+        }
+    }
+}
