@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class BossController : MonoBehaviour
 {
+    public enum BossState { Patrolling, Chasing, Attacking }
+
     public GameObject ghostModel;
     public GameObject humanModel;
     public float detectRange = 15f;
@@ -14,11 +16,14 @@ public class BossController : MonoBehaviour
     public int humanDamage = 12;
     public float attackCooldown = 2f;
     public bool isHuman = false;
+    public Transform[] patrolPoints;
 
     private Transform player;
     private NavMeshAgent navMeshAgent;
     private float lastAttackTime;
     private bool isAttackingPlayer = false;
+    private int currentPatrolIndex;
+    private BossState currentState;
 
     void Start()
     {
@@ -40,6 +45,10 @@ public class BossController : MonoBehaviour
 
         lastAttackTime = -attackCooldown;
         ActivateGhost();
+
+        currentState = BossState.Patrolling;
+        currentPatrolIndex = 0;
+        PatrolToNextPoint();
     }
 
     void Update()
@@ -47,21 +56,59 @@ public class BossController : MonoBehaviour
         if (player == null || navMeshAgent == null) return;
 
         float distance = Vector3.Distance(player.position, transform.position);
-        Debug.Log("Distance to player: " + distance);
-        if (distance <= detectRange)
+        switch (currentState)
         {
-            ChasePlayer();
+            case BossState.Patrolling:
+                if (distance <= detectRange)
+                {
+                    currentState = BossState.Chasing;
+                }
+                else if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f)
+                {
+                    PatrolToNextPoint();
+                }
+                break;
+            case BossState.Chasing:
+                if (distance <= detectRange)
+                {
+                    ChasePlayer();
+                    if (distance <= navMeshAgent.stoppingDistance)
+                    {
+                        currentState = BossState.Attacking;
+                        isAttackingPlayer = true;
+                        StartCoroutine(ContinuousAttack(player.GetComponent<PlayerHealth>()));
+                    }
+                }
+                else
+                {
+                    currentState = BossState.Patrolling;
+                    PatrolToNextPoint();
+                }
+                break;
+            case BossState.Attacking:
+                if (distance > navMeshAgent.stoppingDistance)
+                {
+                    isAttackingPlayer = false;
+                    StopAllCoroutines();
+                    currentState = BossState.Chasing;
+                }
+                break;
         }
-        else
-        {
-            navMeshAgent.ResetPath();
-        }
+    }
+
+    void PatrolToNextPoint()
+    {
+        if (patrolPoints.Length == 0)
+            return;
+
+        navMeshAgent.destination = patrolPoints[currentPatrolIndex].position;
+        navMeshAgent.speed = isHuman ? humanSpeed : ghostSpeed;
+
+        currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
     }
 
     void ChasePlayer()
     {
-        if (player == null || navMeshAgent == null) return;
-
         if (navMeshAgent.isOnNavMesh)
         {
             navMeshAgent.SetDestination(player.position);

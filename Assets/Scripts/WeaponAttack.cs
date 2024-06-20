@@ -7,13 +7,14 @@ public class WeaponAttack : MonoBehaviour
     public int attackDamage = 20;
     public AudioClip attackSFX;
     public Transform cameraTransform;
-    public float attackRange = 2f; 
+    public float attackRange = 2f;
 
     private Transform playerTransform;
     private Transform bossTransform;
     private bool canAttack = false;
     private int searchAttempts = 0;
     private const int maxSearchAttempts = 2;
+    private bool bossDefeated = false;
 
     void Start()
     {
@@ -27,13 +28,14 @@ public class WeaponAttack : MonoBehaviour
 
     void Update()
     {
-        if (searchAttempts < maxSearchAttempts)
+        if (!bossDefeated && searchAttempts < maxSearchAttempts)
         {
             CheckBossProximity();
-            if (canAttack && Input.GetKeyDown(KeyCode.B))
-            {
-                Attack();
-            }
+        }
+
+        if (canAttack && Input.GetButtonDown("Fire1"))
+        {
+            Attack();
         }
     }
 
@@ -51,15 +53,20 @@ public class WeaponAttack : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Boss not found.");
+            // Debug.LogError("Boss not found.");
             searchAttempts++;
+            if (searchAttempts >= maxSearchAttempts)
+            {
+                bossDefeated = true;
+                Debug.Log("Boss has been defeated. No more attacks.");
+            }
         }
     }
 
     void Attack()
     {
         Debug.Log("Attempting to attack.");
-        if (bossTransform != null)
+        if (bossTransform != null && !bossDefeated)
         {
             BossHealth bossHealth = bossTransform.GetComponent<BossHealth>();
             if (bossHealth != null)
