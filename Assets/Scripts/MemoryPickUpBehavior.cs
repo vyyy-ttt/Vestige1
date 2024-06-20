@@ -17,7 +17,6 @@ public class MemoryPickUpBehavior : MonoBehaviour
         PlayerSwordBehavior.swordIsActive = false;
         levelManager = GetComponent<LevelManager>();
         isLevelThree = SceneManager.GetActiveScene().name == "Level3";
-
     }
 
     // Update is called once per frame
@@ -31,26 +30,44 @@ public class MemoryPickUpBehavior : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            FindObjectOfType<LevelManager>().UpdateMemoryCountText();
+            if (SceneManager.GetActiveScene().name == "Level2" || SceneManager.GetActiveScene().name == "Level2a")
+            {
+                FindObjectOfType<StoryManager2>().GetMemoriesDialogue();
+                FindObjectOfType<LevelManager>().UpdateLevel2Memories();
+                AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
+                Destroy(gameObject);
+            }
+
+            //FindObjectOfType<LevelManager>().UpdateMemoryCountText();
             // comment out if issue \/\/
-            if(isLevelThree)
+            else if(SceneManager.GetActiveScene().name == "Level3")
             {
-                 AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
-                 Destroy(gameObject);
+                FindObjectOfType<LevelManager>().UpdateMemoryCountText();
+                AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
+                Destroy(gameObject);
             }
-            if (gameObject.CompareTag("Sword"))
+
+            else if (gameObject.CompareTag("Sword"))
             {
-                 other.gameObject.transform.GetChild(2).gameObject.SetActive(true);
-                 PlayerSwordBehavior.swordIsActive = true;
-                 PlayerSwordBehavior.hasSword = true;
-                 PlayerController.pauseMovement = true;
-                 FirstEnemyScript.seenPlayer = false;
-                 FindObjectOfType<StoryManager>().NextLine();
+                FindObjectOfType<LevelManager>().UpdateMemoryCountText();
+                other.gameObject.transform.GetChild(2).gameObject.SetActive(true);
+                PlayerSwordBehavior.swordIsActive = true;
+                PlayerSwordBehavior.hasSword = true;
+                PlayerController.pauseMovement = true;
+                FirstEnemyScript.seenPlayer = false;
+                FindObjectOfType<StoryManager>().NextLine();
+                Destroy(gameObject);
             }
-            //if (levelManager.nextLevel == "Level2")
-            //{
+            else if (SceneManager.GetActiveScene().name == "Level4")
+            {
+                AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
+                FindObjectOfType<StoryManager4>().MemoryDialogue();
+                Destroy(gameObject);
+            }
+
             else 
-            { 
+            {
+                FindObjectOfType<LevelManager>().UpdateMemoryCountText();
                 if (StoryManager.getFirstMemories)
                 {
                     FindObjectOfType<StoryManager>().FirstMemoriesDialogue();
@@ -59,13 +76,9 @@ public class MemoryPickUpBehavior : MonoBehaviour
                 {
                     FindObjectOfType<StoryManager>().LastMemoryDialogue();
                 }
+                AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
+                Destroy(gameObject);
             }
-            AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
-            Destroy(gameObject);
         }
-
     }
-
-
-
 }

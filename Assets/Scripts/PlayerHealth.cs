@@ -9,12 +9,16 @@ public class PlayerHealth : MonoBehaviour
     public int startingHealth = 100;
     public AudioClip hurtSFX;
     public Slider healthSlider;
-    public static int currentHealth;
+    public int currentHealth;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Level3" || SceneManager.GetActiveScene().name == "Level4")
+        {
+            startingHealth = 120;
+        }
         currentHealth = startingHealth;
         healthSlider.value = currentHealth;
     }

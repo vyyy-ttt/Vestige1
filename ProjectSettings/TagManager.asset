@@ -19,6 +19,11 @@ TagManager:
   - OptionsCanvas
   - MainMenuCanvas
   - Boss
+  - Spawner
+  - WP2
+  - WP3
+  - WP4
+  - WP5
   layers:
   - Default
   - TransparentFX

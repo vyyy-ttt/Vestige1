@@ -48,6 +48,7 @@ public class StoryManager : MonoBehaviour
         recepFacePlayer = false;
         waitingForE = false;
         dialogueBox.enabled = false;
+        dialogueText.enabled = true;
         PlayerController.pauseMovement = true;
         dialogueIndex = 1;
         checkingForMovement = false;
@@ -320,7 +321,7 @@ public class StoryManager : MonoBehaviour
             dialogueIndex++;
             PlayerAttack.disableTeleport = true;
             //MoveReceptionistNextRoom();
-            Invoke("WaitForEnemy", 9);
+            Invoke("WaitForEnemy", 6);
         }
         else if (dialogueIndex == 30)
         {

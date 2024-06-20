@@ -23,6 +23,8 @@ public class PlayerAttack : MonoBehaviour
     static bool doorMessage2;   // maybe not static
     static bool doorMessage3;
 
+    public static int level4ElevatorEnding = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -115,7 +117,14 @@ public class PlayerAttack : MonoBehaviour
             if (hit.collider.CompareTag("Enemy") && PlayerSwordBehavior.swordIsActive && Input.GetButtonDown("Fire1"))
             {
                 Debug.Log("enemy took damage");
-                FindObjectOfType<EnemyBehavior>().EnemyTakesDamage(weaponDamage);
+                if (SceneManager.GetActiveScene().name == "Level2a")
+                {
+                    FindObjectOfType<Level2EnemyBehavior>().EnemyTakesDamage(weaponDamage);
+                }
+                else
+                {
+                    FindObjectOfType<EnemyBehavior>().EnemyTakesDamage(weaponDamage);
+                }
             }
             else if (hit.collider.CompareTag("FirstEnemy") && PlayerSwordBehavior.swordIsActive && Input.GetButtonDown("Fire1"))
             {
@@ -151,8 +160,15 @@ public class PlayerAttack : MonoBehaviour
         
         if (SceneManager.GetActiveScene().name == "Level4")
         {
-
-            gameText.gameObject.SetActive(true);
+            if (level4ElevatorEnding == 1)
+            {
+                Debug.Log("bad ending selected");
+                SceneManager.LoadScene("BadEnding");
+            }
+            else if (level4ElevatorEnding == 2)
+            {
+                FindObjectOfType<StoryManager4>().GoodEnding();
+            }
         }
         else if (SceneManager.GetActiveScene().name == "Level1")
         {
@@ -169,6 +185,18 @@ public class PlayerAttack : MonoBehaviour
                 FindObjectOfType<LevelManager>().UpdateMemoryText();
             }
     
+        }
+        else if (SceneManager.GetActiveScene().name == "Level2" || SceneManager.GetActiveScene().name == "Level2a")
+        {
+            if (LevelManager.totalMemories == 3)
+            {
+                LevelManager.isGameOver = true;
+                FindObjectOfType<LevelManager>().LevelBeat();
+            }
+            else
+            {
+                LevelManager.isGameOver = false;
+            }
         }
         else
         {
