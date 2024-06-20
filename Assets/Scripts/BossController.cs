@@ -17,6 +17,7 @@ public class BossController : MonoBehaviour
     public float attackCooldown = 2f;
     public bool isHuman = false;
     public Transform[] patrolPoints;
+    public float minDistanceFromPlayer = 5f; 
 
     private Transform player;
     private NavMeshAgent navMeshAgent;
@@ -111,9 +112,13 @@ public class BossController : MonoBehaviour
     {
         if (navMeshAgent.isOnNavMesh)
         {
-            navMeshAgent.SetDestination(player.position);
-            navMeshAgent.speed = isHuman ? humanSpeed : ghostSpeed;
-            navMeshAgent.stoppingDistance = 1f;
+            float distance = Vector3.Distance(player.position, transform.position);
+            if (distance > minDistanceFromPlayer)
+            {
+                navMeshAgent.SetDestination(player.position);
+                navMeshAgent.speed = isHuman ? humanSpeed : ghostSpeed;
+                navMeshAgent.stoppingDistance = minDistanceFromPlayer;
+            }
         }
         else
         {
