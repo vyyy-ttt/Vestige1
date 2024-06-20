@@ -40,8 +40,9 @@ public class MemoryPickUpBehavior : MonoBehaviour
 
             //FindObjectOfType<LevelManager>().UpdateMemoryCountText();
             // comment out if issue \/\/
-            else if(isLevelThree)
+            else if(SceneManager.GetActiveScene().name == "Level3")
             {
+                FindObjectOfType<LevelManager>().UpdateMemoryCountText();
                 AudioSource.PlayClipAtPoint(pickupSFX, cameraTransform.position);
                 Destroy(gameObject);
             }

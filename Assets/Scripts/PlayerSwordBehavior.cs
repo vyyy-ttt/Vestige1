@@ -21,6 +21,11 @@ public class PlayerSwordBehavior : MonoBehaviour
             swordIsActive = true;
             hasSword = true;
         }
+        if (SceneManager.GetActiveScene().name == "Level3")
+        {
+            swordIsActive = true;
+            hasSword = true;
+        }
         canSwing = true;
         gameObject.transform.GetChild(2).gameObject.SetActive(swordIsActive);   
     }
