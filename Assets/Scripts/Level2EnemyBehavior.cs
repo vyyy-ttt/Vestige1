@@ -45,6 +45,10 @@ public class Level2EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameObject.transform.position.y > 4f)
+        {
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, 4f, gameObject.transform.position.z);
+        }
         if (!isDead)
         {
             if ((transform.position - playerMoveToward.position).magnitude > enemySeesPlayerDistance)
