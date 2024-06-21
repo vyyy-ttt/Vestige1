@@ -13,7 +13,7 @@ public class PlayerAttack : MonoBehaviour
     public Text gameText;
     public Transform cameraTransform;
     public static bool disableTeleport;
-    private MouseLook mouseLook;
+
 
     private GhostEnemyAI ghostAI;
 
@@ -22,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
     static bool doorMessage;
     static bool doorMessage2;   // maybe not static
     static bool doorMessage3;
+    public static bool playerAttackedEnemy;
 
     public static int level4ElevatorEnding = 0;
 
@@ -35,8 +36,9 @@ public class PlayerAttack : MonoBehaviour
         gameText.gameObject.SetActive(false);
         originalReticleColor = Color.white;
         weaponDamage = 20;
-        mouseLook = GetComponent<MouseLook>();
         ghostAI = GetComponent<GhostEnemyAI>();
+
+        playerAttackedEnemy = false;
     }
 
     // Update is called once per frame
@@ -111,6 +113,8 @@ public class PlayerAttack : MonoBehaviour
             if(MouseLook.isCrouching && hit.collider.CompareTag("Enemy") && PlayerSwordBehavior.swordIsActive && Input.GetButtonDown("Fire1") && ghostAI.currentState == GhostEnemyAI.FSMStates.Patrol) // and in patrol mode
             {
                 hit.transform.gameObject.GetComponent<EnemyBehavior>().EnemyTakesDamage(100);
+                playerAttackedEnemy = true;
+                EnemyBehavior.seenPlayer = true;
                 Debug.Log("enemy was hit");
             }
             // if enemy within 2 units and player has sword out and hits mouse, enemy takes damage
@@ -125,6 +129,8 @@ public class PlayerAttack : MonoBehaviour
                 else
                 {
                     hit.transform.gameObject.GetComponent<EnemyBehavior>().EnemyTakesDamage(20);
+                    playerAttackedEnemy = true;
+                    EnemyBehavior.seenPlayer = true;
                     Debug.Log("enemy was hit");
                 }
             }
@@ -198,6 +204,19 @@ public class PlayerAttack : MonoBehaviour
             else
             {
                 LevelManager.isGameOver = false;
+            }
+        }
+        else if(SceneManager.GetActiveScene().name == "Level3")
+        {
+            if(!(LevelManager.hasTriedElevator))
+            {
+
+                LevelManager.hasTriedElevator = true;
+            }
+            if(SceneManager.GetActiveScene().name == "Level3" && LevelManager.totalMemories == 6)
+            {
+                LevelManager.isGameOver = true;
+                FindObjectOfType<LevelManager>().LevelBeat();
             }
         }
         else
