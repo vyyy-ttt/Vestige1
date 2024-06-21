@@ -18,7 +18,7 @@ public class PlayerSwordBehavior : MonoBehaviour
         bool swordIsActive = false;
         if (SceneManager.GetActiveScene().name == "Level2a")
         {
-            swordIsActive = true;
+            //swordIsActive = true;
             hasSword = true;
         }
         if (SceneManager.GetActiveScene().name == "Level3")
