@@ -17,8 +17,6 @@ public class LevelManager : MonoBehaviour
     public Text memoryInfo;
     public Text killCount;
     public GameObject dialogueBox;
-    private LevelThreeMemory levelThreeMemory;
-    private bool isLevelThree;
 
     public static bool hasTriedElevator;
 
@@ -28,11 +26,6 @@ public class LevelManager : MonoBehaviour
         isGameOver = false;
         totalMemories = 0;
         hasTriedElevator = false;
-        isLevelThree = SceneManager.GetActiveScene().name == "Level3";
-        if (isLevelThree)
-        {
-            memoryInfo.gameObject.SetActive(false);
-        }
 
         //gameText.gameObject.SetActive(false);
         //totalMemories = 0;
@@ -43,21 +36,31 @@ public class LevelManager : MonoBehaviour
             totalMemories = 2;
         }
 
-        if (isLevelThree)
+        if (SceneManager.GetActiveScene().name == "Level3")
         {
-            levelThreeMemory = GetComponent<LevelThreeMemory>();
-            levelThreeMemory.InitializeMemory();
             totalKills = 0;
+            memoryInfo.gameObject.SetActive(true);
+            dialogueBox.gameObject.SetActive(true);
+            memoryInfo.text = "If I wanted to, I could sneak up on them. They don't look hostile...";
+
         }
     }
 
     void Update()
     {
-        // if not working comment out it was commented out from last submission
-        // if (nextLevel == "Level4" && Input.GetKeyDown(KeyCode.E))
-        // {
-        //     memoryInfo.gameObject.SetActive(false);
-        // }
+        if (SceneManager.GetActiveScene().name == "Level3" && Input.GetKeyDown(KeyCode.E))
+        {
+            //memoryInfo.gameObject.SetActive(false);
+            dialogueBox.gameObject.SetActive(false);
+        }
+        if (SceneManager.GetActiveScene().name == "Level3")
+        {
+            if (hasTriedElevator)
+            {
+                memoryCount.text = "memories: " + totalMemories + "   remaining: " + (6 - totalMemories);
+            }
+        }
+
     }
 
     // called when health reaches 0

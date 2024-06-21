@@ -75,7 +75,7 @@ public class GhostEnemyAI : MonoBehaviour
         {
             FindNextPoint();
         }
-        else if(distanceToPlayer <= chaseDistance && IsPlayerInClearFOV())
+        else if(distanceToPlayer <= chaseDistance && IsPlayerInClearFOV() && PlayerAttack.playerAttackedEnemy == true)
         {
             currentState = FSMStates.Chase;
         }

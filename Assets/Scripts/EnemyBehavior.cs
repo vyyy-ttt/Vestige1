@@ -18,7 +18,7 @@ public class EnemyBehavior : MonoBehaviour
     public float enemySeesPlayerDistance = 5f;
 
     // when seenPlayer, weapon becaomes active and enemy attacks, otherwise is idle
-    bool seenPlayer = false;
+    public static bool seenPlayer = false;
     int healthAmount; // of enemy
     public static bool enemiesDead; // for whether player can move on from Level 1
 
@@ -45,7 +45,9 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if enemy sees player, look at player
+        if (SceneManager.GetActiveScene().name != "Level3")
+        {
+            // if enemy sees player, look at player
         if (!enemiesDead && seenPlayer)
         {
             PlayerAttack.disableTeleport = false;
@@ -69,12 +71,18 @@ public class EnemyBehavior : MonoBehaviour
                 gameObject.transform.GetChild(0).gameObject.SetActive(true);
                 // should play a sound effect
             }
+        } 
         }
+        
     }
 
     // if enemy sees player, is alive, and close enough, swing weapon (has collider) and play sound
     void SwingWeapon()
     {
+        // if (SceneManager.GetActiveScene().name == "Level3")
+        // {
+        //     if ()
+        // }
         if (!enemiesDead && seenPlayer && distance <= minDistance)
         {
             gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("AxeSwung");
