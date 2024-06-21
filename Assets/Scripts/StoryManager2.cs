@@ -21,7 +21,7 @@ public class StoryManager2 : MonoBehaviour
 
     public GameObject memory1;
     public GameObject memory2;
-    public GameObject stageMemory;
+    public GameObject finalMemory;
 
     void Start()
     {
@@ -43,7 +43,7 @@ public class StoryManager2 : MonoBehaviour
         {
             memory1.SetActive(false);
             memory2.SetActive(false);
-            stageMemory.SetActive(false);
+            finalMemory.SetActive(false);
         }
     }
 
@@ -74,9 +74,9 @@ public class StoryManager2 : MonoBehaviour
         //NPCsCountText.text = "NPCs Talked To: " + npcInteractionCount + "/3";
         //memoriesCountText.text = "Memories: " + memoriesCount + "/3";
 
-        if (LevelManager.totalKills == 4)
+        if (LevelManager.totalKills == 1)
         {
-            stageMemory.SetActive(true);
+            finalMemory.SetActive(true);
         }
     }
 
@@ -144,6 +144,41 @@ public class StoryManager2 : MonoBehaviour
             dialogueText.enabled = true;
             SetWaitForE();
         }
+        else if (LevelManager.totalMemories == 3)
+        {
+            dialogueText.text = memories[3];
+            dialogueBox.enabled = true;
+            dialogueText.enabled = true;
+            SetWaitForE();
+        }
+        else if (LevelManager.totalMemories == 4)
+        {
+            dialogueText.text = memories[4];
+            dialogueBox.enabled = true;
+            dialogueText.enabled = true;
+            SetWaitForE();
+        }
+        else if (LevelManager.totalMemories == 5)
+        {
+            dialogueText.text = memories[5];
+            dialogueBox.enabled = true;
+            dialogueText.enabled = true;
+            SetWaitForE();
+        }
+        else if (LevelManager.totalMemories == 6)
+        {
+            dialogueText.text = memories[6];
+            dialogueBox.enabled = true;
+            dialogueText.enabled = true;
+            SetWaitForE();
+        }
+        else if (LevelManager.totalMemories == 7)
+        {
+            dialogueText.text = memories[7];
+            dialogueBox.enabled = true;
+            dialogueText.enabled = true;
+            SetWaitForE();
+        }
     }
 
     public void TransitionLevel()
@@ -169,9 +204,14 @@ public class StoryManager2 : MonoBehaviour
 
     private readonly string[] memories =
     {
-        "[You pick up a bullet. You can still feel the coolness of the metal in this form.]",
-        "[You pick up an envelope filled with money. Wait, are those blood stains?]",
-        "[You pick up a contract. The target's face is blurry, but the features seem to match up with the face on your keycard.]"
+        "[You pick up a bullet. You can still feel the coolness of the metal in this form.]", // Index 0
+        "[You pick up an envelope filled with money. Wait, are those blood stains?]", // Index 1
+        "[You pick up some more blood-stained dollar bills. There are only hundred dollar bills.]", // Index 2
+        "[You pick up a half-empty martini glass. Someone must have left the party a bit too early.]", // Index 3
+        "[You pick up a macaron. You remember never being able to resist them no matter the setting.]", // Index 4
+        "[You pick up a tablet. You briefly catch a glimpse of some coordinates before the screen goes black.]", // Index 5
+        "[The tablet you picked up earlier suddenly turns on again. There are flashes of security camera footage from both indoors and outdoors.]", // Index 6
+        "[You pick up a contract. The target's face is blurry, but the features seem to match up with the face on your keycard.]" // Last/8th Memory - Index 7
     };
 
     private readonly string[] npcDialogue =

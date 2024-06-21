@@ -203,7 +203,7 @@ public class LevelManager : MonoBehaviour
     public void UpdateKillCountText()
     {
         totalKills++;
-        killCount.text = "Kill Count: " + totalKills + "/4";
+        killCount.text = "Kill Count: " + totalKills + "/1";
         if (SceneManager.GetActiveScene().name == "Level3")
         {
             killCount.text = "Kill Count: " + totalKills + "/3";
@@ -219,7 +219,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            memoryCount.text = "Memories: " + totalMemories + "/3";
+            memoryCount.text = "Memories: " + totalMemories + "/8";
         }
     }
 }
