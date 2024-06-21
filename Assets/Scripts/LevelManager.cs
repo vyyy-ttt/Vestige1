@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
             totalKills = 0;
             memoryInfo.gameObject.SetActive(true);
             dialogueBox.gameObject.SetActive(true);
-            memoryInfo.text = "If I wanted to, I could sneak up on them. They don't look hostile...";
+            memoryInfo.text = "After that tussle downstairs, I'm feeling a lot stronger. If I wanted to, I could sneak up on them. They don't look hostile...";
 
         }
     }
@@ -58,6 +58,16 @@ public class LevelManager : MonoBehaviour
             if (hasTriedElevator)
             {
                 memoryCount.text = "memories: " + totalMemories + "   remaining: " + (6 - totalMemories);
+            }
+            if(EnemyBehavior.enmiesThatHaveDied == 1)
+            {
+                dialogueBox.gameObject.SetActive(true);
+                memoryInfo.text = "Hey! Why would you scare him off?";
+            }
+            if(EnemyBehavior.enmiesThatHaveDied == 2)
+            {
+                dialogueBox.gameObject.SetActive(true);
+                memoryInfo.text = "What's the mater with you? You're clearly a troubled soul... troubled souls don't always take the first time...";
             }
         }
 
