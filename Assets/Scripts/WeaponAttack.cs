@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponAttack : MonoBehaviour
 {
-    public int attackDamage = 20;
+    public int attackDamage = 10;
     public AudioClip attackSFX;
     public Transform cameraTransform;
     public float attackRange = 2f;
@@ -33,8 +33,10 @@ public class WeaponAttack : MonoBehaviour
             CheckBossProximity();
         }
 
-        if (canAttack && Input.GetButtonDown("Fire1"))
+        if (canAttack && Input.GetButtonDown("Fire1") && !BossHealth.bossDead)
         {
+            gameObject.GetComponent<Animator>().SetTrigger("SwordSwung");
+            gameObject.GetComponent<Animator>().SetTrigger("SwordReturned");
             Attack();
         }
     }
@@ -70,7 +72,7 @@ public class WeaponAttack : MonoBehaviour
         {
             BossHealth bossHealth = bossTransform.GetComponent<BossHealth>();
             if (bossHealth != null)
-            {
+            {;
                 bossHealth.TakeDamage(attackDamage);
                 Debug.Log("Attacked boss for " + attackDamage + " damage.");
                 if (attackSFX != null)
