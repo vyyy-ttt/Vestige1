@@ -10,11 +10,12 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip hurtSFX;
     public Slider healthSlider;
     public int currentHealth;
-
+    public static bool playerDied;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerDied = false;
         if (SceneManager.GetActiveScene().name == "Level3" || SceneManager.GetActiveScene().name == "Level4")
         {
             startingHealth = 120;
@@ -33,8 +34,18 @@ public class PlayerHealth : MonoBehaviour
     public void PlayerTakesDamage(int damageAmount)
     {
         Debug.Log("Player takes damage: " + damageAmount);
-        AudioSource.PlayClipAtPoint(hurtSFX, GameObject.FindGameObjectWithTag("MainCamera").transform.position);
-        if (currentHealth > 0)
+        if (SceneManager.GetActiveScene().name == "Level4")
+        {
+            if (currentHealth % 20 == 0 && currentHealth != 100 && currentHealth > 0 && !BossHealth.bossDead)
+            {
+                AudioSource.PlayClipAtPoint(hurtSFX, GameObject.FindGameObjectWithTag("MainCamera").transform.position);
+            }
+        }
+        else
+        {
+            AudioSource.PlayClipAtPoint(hurtSFX, GameObject.FindGameObjectWithTag("MainCamera").transform.position);
+        }
+        if (currentHealth > 0 && !BossHealth.bossDead)
         {
             currentHealth -= damageAmount;
             healthSlider.value = currentHealth;
@@ -50,6 +61,7 @@ public class PlayerHealth : MonoBehaviour
     void PlayerDies()
     {
         Debug.Log("Player ran away...");
+        playerDied = true;
         //AudioSource.PlayClipAtPoint(deadSFX, transform.position);
         transform.Rotate(-90, 0, 0, Space.Self); // Space.Self, according to local rotation
         FindObjectOfType<LevelManager>().LevelLost();

@@ -23,10 +23,13 @@ public class StoryManager4 : MonoBehaviour
     bool memDialogue;
     bool waitToKill;
     bool waitToKillOrSpare;
-
+    public GameObject sword;
     public Text credits;
     public Canvas normalUI;
     int creditLineCount;
+
+    public GameObject ghostRanParticle;
+    public GameObject BGMPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +47,7 @@ public class StoryManager4 : MonoBehaviour
         dialogueIndex = 0;
         waitToKill = false;
         waitToKillOrSpare = false;
+        LevelManager.totalKills = 2;    //  ERASE
     }
 
     // Update is called once per frame
@@ -52,6 +56,7 @@ public class StoryManager4 : MonoBehaviour
         if (waitForBeginning && Vector3.Distance(boss.position, player.position) <= 15)
         {
             waitForBeginning = false;
+            boss.LookAt(player.position);
             PlayerController.pauseMovement = true;
             NextLine();
         }
@@ -80,6 +85,10 @@ public class StoryManager4 : MonoBehaviour
             dialogueText.enabled = false;
             PlayerAttack.level4ElevatorEnding = 1;
             Debug.Log("level 4 ending is 1");
+            BGMPlayer.GetComponent<AudioSource>().Stop();
+            Instantiate(ghostRanParticle, boss.position, Quaternion.Euler(0, 1, 0));
+            Destroy(boss.gameObject);
+
             // maybe make the music stop
         }
         if (waitToKillOrSpare)
@@ -93,6 +102,9 @@ public class StoryManager4 : MonoBehaviour
                 dialogueBox.enabled = false;
                 dialogueText.enabled = false;
                 PlayerAttack.level4ElevatorEnding = 1;
+                BGMPlayer.GetComponent<AudioSource>().Stop();
+                Instantiate(ghostRanParticle, boss.position, Quaternion.Euler(0, 1, 0));
+                Destroy(boss.gameObject);
                 // maybe make the music stop
             }
             else if (Input.GetButtonDown("Fire2"))
@@ -100,6 +112,7 @@ public class StoryManager4 : MonoBehaviour
                 waitToKillOrSpare = false;
                 dialogueIndex++;
                 PlayerAttack.level4ElevatorEnding = 2;
+                sword.SetActive(false);
                 // elevator will fade to white 
                 // make the music stop?
                 NextLine();
@@ -151,12 +164,22 @@ public class StoryManager4 : MonoBehaviour
             dialogueText.text = dialogue[dialogueIndex];
             waitToKillOrSpare = true;
         }
+        else if (dialogueIndex == 20)
+        {
+            waitingForE = true;
+            dialogueText.text = dialogue[dialogueIndex];
+            dialogueIndex++;
+            dialogueBox.enabled = true; // consider putting this at end of 2
+            dialogueText.enabled = true;
+            boss.GetChild(1).gameObject.GetComponent<Animator>().SetTrigger("alive");
+        }
         else if (dialogueIndex == 25)
         {
             waitingForE = false;
             dialogueBox.enabled = false; // consider putting this at end of 2
             dialogueText.enabled = false;
             PlayerController.pauseMovement = false;
+            boss.GetChild(1).gameObject.GetComponent<Animator>().SetTrigger("alive");
         }
         else
         {
@@ -181,11 +204,11 @@ public class StoryManager4 : MonoBehaviour
         Time.timeScale = 0f;
         if (LevelManager.totalKills > 2)
         {
-            dialogueText.text = "[You pick up half of a photograph. It matches the other half you picked up earlier. Beside yourself, you're shaking hands with men in suits, grim-faced.]";
+            dialogueText.text = "[You pick up half of a photograph. It matches the other half you picked up earlier. Beside yourself, you're shaking hands with men in suits, grim-faced. You'd been doing this a long time. And you were good at it.]";
         }
         else 
         {
-            dialogueText.text = "[You pick up half of a photograph. It matches the other half you picked up earlier. Beside yourself is a woman, and a child. You're all smiling.]";
+            dialogueText.text = "[You pick up half of a photograph. It matches the other half you picked up earlier. Beside yourself is a woman, and a child. You're all smiling. You remember why you had to become what you did. You miss them.]";
         }
         dialogueBox.enabled = true;
         dialogueText.enabled = true;
