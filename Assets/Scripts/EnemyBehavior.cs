@@ -21,6 +21,7 @@ public class EnemyBehavior : MonoBehaviour
     public static bool seenPlayer = false;
     int healthAmount; // of enemy
     public static bool enemiesDead; // for whether player can move on from Level 1
+    public static int enmiesThatHaveDied; // for total enemies dead 
 
     float distance; // for calculations
     public GameObject ghostRanParticle; // particle prefab
@@ -106,6 +107,7 @@ public class EnemyBehavior : MonoBehaviour
     private void EnemyDies()
     {
         enemiesDead = true;   // player may continue (can modify this, have an enemiesDead static for clearing room and enemyDead for each)
+        enmiesThatHaveDied++;
         PlayerAttack.disableTeleport = false;
         Debug.Log("enemy ran away");
         // play particle effect, drop loot, destroy enemy
@@ -114,9 +116,11 @@ public class EnemyBehavior : MonoBehaviour
         Instantiate(lootPrefab, transform.position + Vector3.up, transform.rotation);
         Destroy(gameObject, 0.5f); 
 
+
         if (SceneManager.GetActiveScene().name == "Level2a" || SceneManager.GetActiveScene().name == "Level3" )
         {
             FindObjectOfType<LevelManager>().UpdateKillCountText();
         }
     }
 }
+
