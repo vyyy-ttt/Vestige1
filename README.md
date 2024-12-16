@@ -11,10 +11,10 @@ rather interesting how natural of a fighter you are, as you seem to be able to h
 Game Trailer: https://drive.google.com/file/d/192SPsQuQs-aa18MCG7MEdh49BufTXg8R/view?usp=drive_link
 <br />
 <br />
-WebGL Export: https://play.unity.com/mg/other/vestige-gold-master-release 
+WebGL Export: https://play.unity.com/en/games/a4f63b4c-696a-48e9-8ab4-da8005002a14/vestige-gold-master-release 
 <br />
 <br />
 Designed in Unity by: Corina Torres, Zhile (Charlotte) Wang, Vy Truong, & Carina Vale
 <br />
 <br />
-CS3540 Game Programming - Final Project, Summer 1 2024
+Northeastern University | CS3540 Game Programming - Final Project | Summer 1 2024
